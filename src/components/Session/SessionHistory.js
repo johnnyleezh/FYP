@@ -19,6 +19,8 @@ function SessionHistory() {
                     </div>
                 </div>
                 <SessionHistoryRow date='04/03/2023' title='Diagnosed with depression' score='60%'/>
+                <SessionHistoryRow date='04/03/2023' title='Diagnosed with depression' score='60%'/>
+                <SessionHistoryRow date='04/03/2023' title='Diagnosed with depression' score='60%'/>
             </div>
         </div>
     )
