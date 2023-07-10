@@ -2,21 +2,19 @@ import React from 'react';
 import '../../App.css';
 import { Button } from '../Button';
 import './Monitor.css';
+import MonitorRow from './MonitorRow';
 
 function Monitor() {
     return (
         <div class="contentContainer">
-            <div class="rowContainer">
-                <div className="columnContainer">
-                <img src="/images/background.png" className="photo" alt="Student Photo" width="70%" height="90%"></img>
-                </div>
-                <div className="columnMiddleContainer">
-                    Middle
-                </div>
-                <div className="columnContainer">
-                    Right
-                </div>
-            </div>
+            <h1 className="monitorTitle">Monitor List</h1>
+            <div className="searchBarMonitor">Enter here...</div>
+            <MonitorRow address='students' profilePic='/images/jingyuan.webp' name='Johnny' 
+            studentId='1800795' course='Software Engineering' trimester='Y5S2' 
+            atttendance='83' mentalHealth='63' />
+            <MonitorRow />
+
+            <MonitorRow />
         </div>
     );
 }

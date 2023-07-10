@@ -1,27 +1,20 @@
 .contentContainer {
-    background-color: aquamarine;
+    /* background-image: url('/images/paperBackground.jpg'); */
+    background-color: white;
     width: 90%;
     height: 80%;
+    margin: 1em 1em 1em 1em;
+    text-align: center;
 }
 
-.rowContainer {
-    background-color: yellow;
-    width: 100%;
-    height: 30%;
-    display: flex;
+.monitorTitle {
+    color: black;
+    margin: 1em;
 }
 
-.columnContainer {
-    flex: 1;
-    background-color: red;
-}
-
-.columnMiddleContainer {
-    flex: 3;
-    background-color: blue;
-}
-
-.photo {
-    display: block;
-margin: 10px auto auto auto;
+.searchBarMonitor {
+    margin: 0 1em 1em 1em;
+    text-align: left;
+    color: rgb(120, 120, 120);
+    border: 2px solid black;
 }

@@ -1,0 +1,32 @@
+.sessionTitle {
+    color: black;
+    margin: 1em;
+}
+
+.sessionHistoryContainer {}
+
+.sessionHistoryColumn {
+    /* flex:1; */
+}
+
+.sessionHistoryHeader {
+    background-color: red;
+    display: flex;
+    font-size: 1.5em;
+}
+
+.header {
+    text-align: left;
+    margin-left: 10px;
+}
+
+.sessionHistoryContent {
+    background-color: blue;
+    display: flex;
+    font-size: 1.1em;
+}
+
+.data {
+    text-align: left;
+    margin-left: 10px;
+}
