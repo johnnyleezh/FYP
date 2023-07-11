@@ -3,16 +3,20 @@
     margin: 1em;
 }
 
-.sessionHistoryContainer {}
+.sessionHistoryContainer {
+    background-color: beige;
+    border-style: outset;
+    margin: 0 1em 2em 1em;
+}
 
 .sessionHistoryColumn {
     /* flex:1; */
 }
 
 .sessionHistoryHeader {
-    background-color: red;
     display: flex;
     font-size: 1.5em;
+    border-style: outset;
 }
 
 .header {
@@ -21,9 +25,9 @@
 }
 
 .sessionHistoryContent {
-    background-color: blue;
     display: flex;
     font-size: 1.1em;
+    border-style: outset;
 }
 
 .data {

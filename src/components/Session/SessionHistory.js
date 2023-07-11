@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react';
 import '../Session/SessionHistory.css'
 import SessionHistoryRow from '../Session/SessionHistoryRow'
+import SessionSummaryModal from '../Session/SessionSummaryModal'
 
 function SessionHistory() {
+    const [show, setShow] = useState(false);
+
+    const showModal = (e) => {
+      setShow(!show);
+    };
     return (
         <div>
             <h1 className="sessionTitle">Session History</h1>
@@ -18,9 +24,24 @@ function SessionHistory() {
                         <p className="header">Score</p>
                     </div>
                 </div>
-                <SessionHistoryRow date='04/03/2023' title='Diagnosed with depression' score='60%'/>
-                <SessionHistoryRow date='04/03/2023' title='Diagnosed with depression' score='60%'/>
-                <SessionHistoryRow date='04/03/2023' title='Diagnosed with depression' score='60%'/>
+                <SessionHistoryRow date='01/03/2023' title='Diagnosed with depression' score='63%' />
+                <button
+                    className="toggle-button"
+                    id="centered-toggle-button"
+                    onClick={(e) => {
+                        showModal(e);
+                    }}
+                >
+                    show Modal
+                </button>
+                <SessionSummaryModal onClose={showModal} show={show}>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis
+                    deserunt corrupti, ut fugit magni qui quasi nisi amet repellendus non
+                    fuga omnis a sed impedit explicabo accusantium nihil doloremque
+                    consequuntur.
+                </SessionSummaryModal>
+                <SessionHistoryRow date='02/02/2023' title='Follow up session' score='46%' />
+                <SessionHistoryRow date='01/01/2023' title='Traumatic recovery therapy' score='27%' />
             </div>
         </div>
     )
