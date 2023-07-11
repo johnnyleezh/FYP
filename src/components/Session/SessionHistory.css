@@ -27,10 +27,17 @@
 .sessionHistoryContent {
     display: flex;
     font-size: 1.1em;
-    border-style: outset;
 }
 
 .data {
     text-align: left;
     margin-left: 10px;
+}
+
+.sessionRowContainer {
+    border-style: outset;
+}
+
+.sessionSummaryContainer {
+    display: flex;
 }

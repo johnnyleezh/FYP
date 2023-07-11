@@ -1,9 +1,8 @@
 .contentContainer {
     /* background-image: url('/images/paperBackground.jpg'); */
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     width: 90%;
-    height: 80%;
-    margin: 1em 1em 1em 1em;
+    margin: 1rem;
     text-align: center;
 }
 

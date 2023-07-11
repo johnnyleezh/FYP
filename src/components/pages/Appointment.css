@@ -9,7 +9,6 @@ video {
   .appointment-container {
     /* background: url('/images/img-home.jpg') center center/cover no-repeat; */
     background: url('/images/background.png') center center/cover no-repeat;
-    height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;

@@ -11,12 +11,13 @@ const MonitorRow = (props) => {
     const atttendance = props.atttendance;
     const mentalHealth = props.mentalHealth;
     // const address = "/"+props.address
-    const address = '/profile';
+    const address = props.address;
     const appt = props.appt;
+    const lastTested = props.lastTested;
 
     return (
         <div>
-            <Link to={address} className="link" style={{textDecoration:'none'}}>
+            <Link to={address} className="link" style={{ textDecoration: 'none' }}>
                 <div class="rowContainer">
                     <div className="columnContainer">
                         <img src={profilePic} className="photo" alt="Student Photo" width="140em" height="180em"></img>
@@ -45,6 +46,14 @@ const MonitorRow = (props) => {
                     <div className="columnContainer">
                         <p className="score">{mentalHealth}%</p>
                         <p>Mental Health Score</p>
+                        <div style={{ marginTop: 40, display: 'flex' }}>
+                            <div style={{ flex: 1, textAlign: 'right' }}>
+                                <p>Last Tested:</p>
+                            </div>
+                            <div style={{ flex: 1, textAlign: 'left', marginLeft: 5 }}>
+                                {lastTested}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </Link>
