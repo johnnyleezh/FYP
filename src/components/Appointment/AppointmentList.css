@@ -42,3 +42,44 @@
     flex: 2;
     text-align: center;
 }
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.actions button {
+    margin-top: 1rem;
+    border: 0;
+    background: #78f89f;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.cancel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancel button {
+    margin-top: 1rem;
+    border: 0;
+    background: #de2446;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.neutral button {
+    border: 0;
+    background: #e6e6e6;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    line-height: 1;
+}
