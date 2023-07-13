@@ -12,6 +12,7 @@ function AppointmentListRow(props) {
     // const address = "/"+props.address
     const address = props.address;
     const date = props.date;
+    const time = props.time;
     const title = props.title;
 
     return (
@@ -38,7 +39,10 @@ function AppointmentListRow(props) {
                 </div>
             </div>
             <div className="apptColumnDateContent">
-                <div style={{marginTop:'6rem'}}>{date}</div>
+                <div style={{marginTop:'6rem'}}>
+                    <p>{date}</p>
+                    <p>{time}</p>
+                    </div>
             </div>
             <div className="apptColumnTitleContent">
             <div style={{marginTop:'6rem'}}>{title}</div>

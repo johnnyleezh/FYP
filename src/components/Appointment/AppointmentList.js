@@ -28,6 +28,7 @@ function AppointmentList() {
         mentalHealth='63'
         address='/profile'
         date='03/07/2023'
+        time='5:00pm'
         title='Having trouble thinking straight'
       />
       <Row
