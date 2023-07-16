@@ -83,3 +83,8 @@
     font-size: 0.8rem;
     line-height: 1;
 }
+.recordTextArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,6 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import AppointmentCancel from './AppointmentCancel';
 
-function AppointmentDetail({ isOpen, onClose, onEdit }) {
+function AppointmentDetail({ isOpen, onClose, onEdit, onRecord, detail }) {
+
+  const [appointmentDetails, setAppointmentDetails] = useState(detail)
+  const [cancelOpen, setCancelOpen] = useState(false)
+
+  const apptCancel = () => {
+    //Back end stuff
+
+
+    onClose()
+  }
 
   if (!isOpen) return null
 
@@ -9,10 +20,10 @@ function AppointmentDetail({ isOpen, onClose, onEdit }) {
       <div style={{ backgroundColor: 'beige', marginTop: '1rem', padding: '1rem' }}>
         <div style={{ display: 'flex', fontSize: '1.4rem' }}>
           <div style={{ flex: 1, textAlign: 'right', paddingRight: '1rem' }}>
+            <p>Title:</p>
+            <p>Counsellor:</p>
             <p>Date:</p>
             <p>Time:</p>
-            <p>Counsellor:</p>
-            <p>Title:</p>
           </div>
           <div className="neutral">
             <button className="toggle-button" onClick={onEdit} style={{ position: 'absolute', right: '3rem' }}>
@@ -20,21 +31,21 @@ function AppointmentDetail({ isOpen, onClose, onEdit }) {
             </button>
           </div>
           <div style={{ flex: 1 }}>
-            <p>02/03/2023</p>
-            <p>10:30 AM</p>
-            <p>Dr. Yao Chin Kuok</p>
-            <p>Feeling Lost</p>
+            <p>{appointmentDetails.title}</p>
+            <p>{appointmentDetails.counsellor}</p>
+            <p>{appointmentDetails.date}</p>
+            <p>{appointmentDetails.time}</p>
           </div>
         </div>
       </div>
       <div>
         <div className="actions">
-          <button className="toggle-button" onClick={{}}>
-            Start Session
+          <button className="toggle-button" onClick={onRecord}>
+            Record Session
           </button>
         </div>
         <div className="cancel">
-          <button className="toggle-button" onClick={{}}>
+          <button className="toggle-button" onClick={() => { setCancelOpen(true) }}>
             Cancel Appointment
           </button>
         </div>
@@ -44,6 +55,7 @@ function AppointmentDetail({ isOpen, onClose, onEdit }) {
           </button>
         </div>
       </div>
+      <AppointmentCancel isOpen={cancelOpen} onClose={() => { setCancelOpen(false) }} onCancel={apptCancel} />
     </div>
   )
 }

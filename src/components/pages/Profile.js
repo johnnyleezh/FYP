@@ -3,7 +3,7 @@ import '../../App';
 import { Button } from '../Button';
 import './Profile.css';
 import Title from '../Title';
-import StudentProfile from '../Profile/studentProfile';
+import StudentProfile from '../Profile/StudentProfile'
 
 function Profile() {
   return (
