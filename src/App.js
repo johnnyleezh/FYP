@@ -1,12 +1,12 @@
 import React from 'react';
-import Navbar from './components/Navbar';
+import Navbar from './components/CounsellorComponents/Navbar';
 import './App.css';
-import Home from './components/pages/Home';
+import Home from './components/CounsellorComponents/CounsellorPages/Home';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Appointment from './components/pages/Appointment';
-import Session from './components/pages/Session';
-import StudentList from './components/pages/StudentList';
-import Profile from './components/pages/Profile'
+import Appointment from './components/CounsellorComponents/CounsellorPages/Appointment';
+import Session from './components/CounsellorComponents/CounsellorPages/Session';
+import StudentList from './components/CounsellorComponents/CounsellorPages/StudentList';
+import Profile from './components/CounsellorComponents/CounsellorPages/Profile'
 
 function App() {
   return (
