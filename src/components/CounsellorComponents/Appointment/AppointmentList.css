@@ -1,0 +1,90 @@
+.apptContainer {
+    background-color: white;
+    width: 90%;
+    margin: 1rem;
+}
+
+.apptListHeader {
+    display: flex;
+    font-size: 1.5em;
+    border-style: outset;
+}
+
+.apptColumnProfileHeader {
+    flex: 3;
+}
+
+.apptColumnDateHeader {
+    flex: 1;
+}
+
+.apptColumnTitleHeader {
+    flex: 2;
+}
+
+.apptListContent {
+    display: flex;
+    font-size: 1.1em;
+    border-style: outset;
+}
+
+.apptColumnProfileContent {
+    flex: 3;
+}
+
+.apptColumnDateContent {
+    flex: 1;
+    text-align: center;
+    border-right-style: outset;
+}
+
+.apptColumnTitleContent {
+    flex: 2;
+    text-align: center;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.actions button {
+    margin-top: 1rem;
+    border: 0;
+    background: #78f89f;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.cancel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancel button {
+    margin-top: 1rem;
+    border: 0;
+    background: #de2446;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.neutral button {
+    border: 0;
+    background: #e6e6e6;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    line-height: 1;
+}
+.recordTextArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

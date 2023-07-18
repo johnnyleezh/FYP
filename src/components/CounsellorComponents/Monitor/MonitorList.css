@@ -1,0 +1,19 @@
+.contentContainer {
+    /* background-image: url('/images/paperBackground.jpg'); */
+    background-color: rgb(255, 255, 255);
+    width: 90%;
+    margin: 1rem;
+    text-align: center;
+}
+
+.monitorTitle {
+    color: black;
+    margin: 1em;
+}
+
+.searchBarMonitor {
+    margin: 0 1em 1em 1em;
+    text-align: left;
+    color: rgb(120, 120, 120);
+    border: 2px solid black;
+}
