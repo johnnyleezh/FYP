@@ -1,0 +1,35 @@
+{
+    "questions": [
+      {
+        "questionText": "Over the past week, how often have you felt overwhelmed or unable to cope with your emotions and responsibilities?"
+      },
+      {
+        "questionText": "How often do you experience feelings of sadness or hopelessness that affect your daily life?"
+      },
+      {
+        "questionText": "To what extent do you feel anxious or worried about various aspects of your life, such as school, friendships, or family?"
+      },
+      {
+        "questionText": "How frequently do you find it challenging to concentrate or stay focused on tasks?"
+      },
+      {
+        "questionText": "How often do you struggle with low self-esteem or feelings of worthlessness?"
+      },
+      {
+        "questionText": "How many times in the last week have you experienced physical symptoms related to stress, such as headaches, stomachaches, or muscle tension?"
+      },
+      {
+        "questionText": "To what extent do you feel isolated or disconnected from others, even when surrounded by friends or family?"
+      },
+      {
+        "questionText": "How often do you experience disruptions in your sleep patterns, such as trouble falling asleep or waking up frequently during the night?"
+      },
+      {
+        "questionText": "How frequently do you engage in activities or hobbies that bring you joy and relaxation?"
+      },
+      {
+        "questionText": "To what extent do you feel comfortable discussing your emotions and mental health with someone you trust, such as a friend, family member, or counselor?"
+      }
+    ]
+  }
+  
