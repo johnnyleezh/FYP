@@ -48,7 +48,7 @@ function App() {
           <Route path='/students' component={StudentList} />
           <Route path='/profile' component={Profile} />
           <Route path='/helpresource' component={HelpResource} />
-          <Route path='/helpresource' component={MentalHealthTest} />
+          <Route path='/MentalHealthTest' component={MentalHealthTest} />
         </Switch>
       </Router>
     </>

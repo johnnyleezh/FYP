@@ -6,6 +6,8 @@
 
 html, body{
   background: url('/images/background.png') center center/cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   height: 100%;
 }
 
