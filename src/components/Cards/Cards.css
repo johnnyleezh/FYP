@@ -42,6 +42,7 @@ h1 {
   border-radius: 10px;
   overflow: hidden;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .cards__item__pic-wrap {

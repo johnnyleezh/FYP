@@ -7,7 +7,7 @@ import Monitor from '../Monitor/MonitorList';
 import Title from '../Title';
 import StudentProfile from '../Profile/StudentProfile'
 
-function Home({role}) {
+function Home({ role }) {
 
   const students = {
     profilePic: '/images/jingyuan.webp',
@@ -25,7 +25,7 @@ function Home({role}) {
   if (role == 'counsellor') {
     return (
       <div className='body-container'>
-        <Title title="Counsellor Home" />
+        <Title>Counsellor Home</Title>
         <Monitor />
       </div>
     );
@@ -33,18 +33,19 @@ function Home({role}) {
   else if (role == 'student') {
     return (
       <div className='body-container'>
-        <Title title="Student Home" />
-        <StudentProfile 
-        role={{role}}
-      detail={students}
-      />
+        <Title>Student Home</Title>
+        <StudentProfile
+          role={{ role }}
+          detail={students}
+          isProfile={true}
+        />
       </div>
     );
   }
   else {
     return (
       <div className='hero-container'>
-        <Title title="Academic Advisor Home" />
+        <Title>Academic Advisor Home</Title>
         <Monitor />
       </div>
     );

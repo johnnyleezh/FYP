@@ -24,6 +24,8 @@ function Navbar({ role, changeRole }) {
 
   window.addEventListener('resize', showButton);
 
+
+  //Navigation for Counsellor
   if (role == 'counsellor') {
     return (
       <>
@@ -71,7 +73,8 @@ function Navbar({ role, changeRole }) {
       </>
     );
   }
-  else if (role == 'student') {
+  else if (role == 'student') { 
+    //Navigation for Student
     return (
       <>
         <nav className='navbar'>
@@ -128,6 +131,7 @@ function Navbar({ role, changeRole }) {
     );
   }
   else {
+    //Navigation for Academic Advisor
     return (
       <>
         <nav className='navbar'>

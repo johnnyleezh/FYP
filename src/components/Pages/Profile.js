@@ -12,10 +12,11 @@ function Profile() {
   const role = 'counsellor'
   return (
     <div className='body-container'>
-      <Title title="Profile"/>
+      <Title>Profile</Title>
       <StudentProfile 
       role={role}
       detail={detail}
+      isProfile={true}
       />
     </div>
   );
