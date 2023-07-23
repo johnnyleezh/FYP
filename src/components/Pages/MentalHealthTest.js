@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import Questionnaire from '../Questionnaire/Questionnaire'
+import QuestionnaireOption from '../Questionnaire/QuestionnaireOption'
+import Title from '../Title'
 
 function MentalHealthTest() {
-  console.log('mental health test uwu')
   return (
     <div className='body-container'>
-      <Questionnaire 
-      
+      <Title>Mental Health Test</Title>
+      <QuestionnaireOption
       />
     </div>
   )

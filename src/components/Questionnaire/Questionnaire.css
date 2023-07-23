@@ -1,4 +1,27 @@
-.app {
+.quizSelectionContainer {
+    background-color: #fff;
+    width: 35rem;
+    min-height: 100px;
+    height: min-content;
+    border-radius: 15px;
+    box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.75);
+    justify-content: space-evenly;
+    margin-top: 1rem;
+}
+
+.quizSelectionTitle{
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 1.5rem;
+}
+
+.quizSelectionOption{
+    display: flex;
+    margin: 1.5rem;
+
+}
+
+.quizContainer {
     background-color: #fff;
     width: 35rem;
     min-height: 200px;
@@ -8,11 +31,7 @@
     box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.75);
     display: flex;
     justify-content: space-evenly;
-}
-
-.quizContainer{
     margin-top: 1rem;
-    
 }
 
 .score-section {
@@ -26,7 +45,7 @@
 .question-section {
     width: 100%;
     position: relative;
-    flex:2
+    flex: 2
 }
 
 .question-count {
@@ -57,17 +76,26 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    flex:1
+    flex: 1
+}
+
+.answerContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    align-items: center;
 }
 
 .answer {
-    margin:0.3rem;
+    margin: 0.3rem;
     width: 100%;
     font-size: 16px;
     color: #ffffff;
     background-color: #252d4a;
     border-radius: 15px;
     display: flex;
+    flex-direction: column;
     padding: 5px;
     justify-content: flex-start;
     align-items: center;
@@ -93,4 +121,6 @@
 
 .answer svg {
     margin-right: 5px;
+}
+.answer img{
 }

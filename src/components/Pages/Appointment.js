@@ -6,7 +6,7 @@ import AppointmentList from '../Appointment/AppointmentList';
 export default function Appointment() {
   return (
     <div className='body-container'>
-      <Title title="Appointment"/>
+      <Title>Appointment</Title>
       <AppointmentList />
     </div>
   )

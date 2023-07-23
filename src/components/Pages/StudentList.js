@@ -6,7 +6,7 @@ import StudentList from '../StudentList/StudentList';
 export default function Students() {
   return (
     <div className='body-container'>
-      <Title title="Student List" />
+      <Title>Student List</Title>
       <StudentList />
     </div>
   )

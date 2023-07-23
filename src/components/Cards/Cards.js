@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Cards.css';
 import CardItem from './CardItem';
 
-function Cards() {
+function Cards({ resourceType }) {
+
   return (
     <div className='cards'>
       <div className='cards__container'>
@@ -12,7 +13,7 @@ function Cards() {
               src='images/MentalHealth/Stress.jpg'
               text='Intense strain from demanding pressures and overwhelming circumstances'
               label='Stress'
-              path='/services'
+              resourceType={resourceType}
             />
             <CardItem
               src='images/MentalHealth/Depression.webp'

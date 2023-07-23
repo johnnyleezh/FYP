@@ -88,7 +88,7 @@ function AppointmentPopUpModal({ isOpen, onClose, date, time, counsellor, title,
                 <div style={OVERLAY_STYLES}>
                     <div style={MODAL_STYLES}>
                         <div style={{ padding: '1rem' }}>
-                            <Create isOpen={createOpen} onClose={onClose}  detail={detail}></Create>
+                            <Create isOpen={createOpen} onClose={onClose} detail={detail}></Create>
                         </div>
                     </div>
                 </div>
