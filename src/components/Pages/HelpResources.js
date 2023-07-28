@@ -7,7 +7,6 @@ function HelpResources() {
   const [isOpen, setIsOpen] = useState(false)
   const [resourceType, setResourceType] = useState("")
 
-  console.log(isOpen)
   if (!isOpen) {
     return (
       <div className='body-container'>

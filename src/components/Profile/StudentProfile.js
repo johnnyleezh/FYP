@@ -1,51 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Row from '../Monitor/MonitorRow';
 import SessionHistory from '../Session/SessionHistory'
+import AppointmentPopUpModal from '../Appointment/AppointmentPopUpModal';
+import { readData } from '../CRUD/CRUD';
 
-function StudentProfile({ role, detail, isProfile }) {
+function StudentProfile({ user, isProfile }) {
 
-  //CRUD
-  const sessionDetail = [{
-    date: '01/03/2023',
-    time: '10:30AM',
-    title: 'Diagnosed with depression',
-    score: '63%',
-    counsellor: 'Dr Yao Ming',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobisdeserunt corrupti, ut fugit magni qui quasi nisi amet repellendus nonfuga omnis a sed impedit explicabo accusantium nihil doloremqueconsequuntur.',
-    venue: 'KB303'
-  },
-  {
-    date: '02/02/2023',
-    time: '11:30AM',
-    title: 'Follow up session',
-    score: '46%',
-    counsellor: 'Dr Yao Ming',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobisdeserunt corrupti, ut fugit magni qui quasi nisi amet repellendus nonfuga omnis a sed impedit explicabo accusantium nihil doloremqueconsequuntur.',
-    venue: 'KB304'
-  },
-  {
-    date: '01/01/2023',
-    time: '12:30AM',
-    title: 'Traumatic recovery therapy',
-    score: '27%',
-    counsellor: 'Dr Yao Ming',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobisdeserunt corrupti, ut fugit magni qui quasi nisi amet repellendus nonfuga omnis a sed impedit explicabo accusantium nihil doloremqueconsequuntur.',
-    venue: 'KB305'
-  }];
+  const [isOpen, setIsOpen] = useState(false)
+  const [appointment, setAppointment] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const readAppointment = await readData("Appointment", "clientId", user.uniqueId);
+      setAppointment(readAppointment)
+    };
+    fetchData();
+  }, []);
+
+  const profileBtn = () => {
+    if (user.role == 'counsellor') {
+      return (
+        <button className='btn' style={{ position: 'absolute', right: '5em', top: '15em' }}>
+          Monitor
+        </button>
+      )
+    }
+    else if (user.role == 'student') {
+      return (
+        <button className='btn' style={{ position: 'absolute', right: '5em', top: '15em' }}
+          onClick={() => { setIsOpen(true) }}
+        >
+          Create Appointment
+        </button>
+      )
+    }
+  }
 
   return (
     <div className='contentContainer'>
-      <button className='btn' style={{ position: 'absolute', right: '5em', top: '15em' }}>Monitor</button>
+      {profileBtn()}
       <Row
         isOpen={true}
-        detail={detail}
+        detail={user}
       />
+      <h1>Upcoming Appointment</h1>
       <SessionHistory
-        sessionDetail={sessionDetail}
-        role={role}
+        sessionDetail={appointment}
+        role={user.role}
         isProfile={isProfile}
       />
-
+      <AppointmentPopUpModal
+        isOpen={isOpen}
+        onClose={() => { setIsOpen(false) }}
+        createOpen={true}
+        user={user}
+      />
     </div >
   )
 }

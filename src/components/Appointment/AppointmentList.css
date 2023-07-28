@@ -6,8 +6,12 @@
 
 .apptListHeader {
     display: flex;
+    padding:1rem;
     font-size: 1.5em;
     border-style: outset;
+    background-color: rgb(79, 73, 73);
+    color: aliceblue;
+    text-align: center;
 }
 
 .apptColumnProfileHeader {
@@ -27,6 +31,7 @@
     font-size: 1.1em;
     border-style: outset;
     cursor: pointer;
+    background-color: beige;
 }
 
 .apptColumnProfileContent {

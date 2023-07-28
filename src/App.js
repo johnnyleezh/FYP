@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css';
 import Navbar from './components/Navbar'
 import Home from './components/Pages/Home'
@@ -9,20 +9,41 @@ import StudentList from './components/Pages/StudentList'
 import Profile from './components/Pages/Profile'
 import HelpResource from './components/Pages/HelpResources'
 import MentalHealthTest from './components/Pages/MentalHealthTest'
+import { db } from './firebase-config'
+import { collection, getDocs } from 'firebase/firestore'
+import { readSpecificData } from './components/CRUD/CRUD';
 
 function App() {
+
+  const [user, setUser] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const readUser = await readSpecificData("User", "SCRifyGneGhdewInVtor");
+      setUser(readUser)
+    };
+    fetchData();
+  }, []);
 
   const [isCounsellor, setIsCounsellor] = useState("counsellor")
   const [isStudent, setIsStudent] = useState("student")
   const [isAcademicAdvisor, setIsAcademicAdvisor] = useState("advisor")
   const [role, setRole] = useState(isCounsellor)
 
-  const changeRole = () => {
-    if (role == isCounsellor) {
-      setRole(isStudent)
+  const changeUser = () => {
+    if (user.role == isCounsellor) { //change to student
+      const fetchData = async () => {
+        const readUser = await readSpecificData("User", "uYSA6hK2ZXwEjzFsKt1l");
+        setUser(readUser)
+      };
+      fetchData();
     }
     else {
-      setRole(isCounsellor)
+      const fetchData = async () => {
+        const readUser = await readSpecificData("User", "SCRifyGneGhdewInVtor");
+        setUser(readUser)
+      };
+      fetchData();
     }
   }
 
@@ -30,19 +51,22 @@ function App() {
     <>
       <Router>
         <Navbar
-          role={role}
-          changeRole={() => { changeRole() }}
+          user={user}
+          changeUser={() => { changeUser() }}
         />
         <Switch>
           <Route
             path='/'
             exact
-            render={(props) => <Home {...props} role={role} />} // Pass your data as a prop
+            render={() => <Home user={user} />} // Pass your data as a prop
           />
-          <Route path='/appointment' component={Appointment} />
+          <Route
+            path='/appointment'
+            render={() => <Appointment user={user} />}
+          />
           <Route
             path='/session'
-            render={(props) => <Session {...props} role={role} />}
+            render={(props) => <Session user={user} />}
           />
           <Route path='/students' component={StudentList} />
           <Route path='/profile' component={Profile} />

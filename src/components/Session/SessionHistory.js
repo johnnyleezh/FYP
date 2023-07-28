@@ -4,7 +4,6 @@ import SessionHistoryRow from '../Session/SessionHistoryRow'
 
 
 function SessionHistory({ sessionDetail, role, isProfile }) {
-
     const detailRowDisplay = () => {
         const sessionRows = []; // Array to accumulate the SessionHistoryRow components
 
