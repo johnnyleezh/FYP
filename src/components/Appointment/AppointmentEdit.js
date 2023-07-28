@@ -1,17 +1,29 @@
 import React, { useState } from 'react'
 
-function AppointmentEdit({ isOpen, onClose, detail }) {
+function AppointmentEdit({ isOpen, onClose, detail, editedDetail, counsellor }) {
+
+    const updateDetail = () => {
+
+    }
 
     const [editDetails, setEditDetails] = useState(detail)
 
-    if (!isOpen) return null
-
     const handleChange = (e) => {
-        setEditDetails({
-            ...editDetails,
-            title: e.target.value
-        });
+        const { name, value } = e.target;
+        setEditDetails((prevDetails) => ({
+            ...prevDetails,
+            [name]: value,
+        }));
     };
+
+    const handleSubmit = () => {
+        editedDetail(editDetails); // Call the editedDetail prop with edited data
+        // editDetails()
+        onClose();
+    };
+
+
+    if (!isOpen) return null
 
     return (
         <div>
@@ -24,17 +36,16 @@ function AppointmentEdit({ isOpen, onClose, detail }) {
                         <p>Time:</p>
                     </div>
                     <div style={{ flex: 1 }}>
-                        {/* <p>Feeling Lost</p> */}
-                        <input type="text" name="fname" value={editDetails.title} onChange={handleChange} style={{ fontSize: '1.4rem' }}></input>
-                        <p>{detail.counsellor}</p>
-                        <p>{detail.date}</p>
-                        <p>{detail.time}</p>
+                        <input type="text" name="title" value={editDetails.title} onChange={handleChange} style={{ fontSize: '1.4rem' }}></input>
+                        <input type="text" name="counsellorId" value={counsellor.name} onChange={handleChange} style={{ fontSize: '1.4rem' }}></input>
+                        <input type="text" name="date" value={editDetails.date} onChange={handleChange} style={{ fontSize: '1.4rem' }}></input>
+                        <input type="text" name="time" value={editDetails.time} onChange={handleChange} style={{ fontSize: '1.4rem' }}></input>
                     </div>
                 </div>
             </div>
 
             <div className="actions">
-                <button className="toggle-button" onClick={onClose}>
+                <button className="toggle-button" onClick={handleSubmit}>
                     Submit
                 </button>
             </div>

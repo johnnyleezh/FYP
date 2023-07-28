@@ -23,7 +23,7 @@ function AppointmentRecord({ isOpen, onClose, detail }) {
                     </div>
                     <div style={{ flex: 1 }}>
                         <p>{recordDetails.title}</p>
-                        <p>{recordDetails.counsellor}</p>
+                        <p>{recordDetails.counsellorId}</p>
                     </div>
                 </div>
                 <div style={{ display: 'flex', fontSize: '1.4rem' }}>

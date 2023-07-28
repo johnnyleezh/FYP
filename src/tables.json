@@ -1,0 +1,115 @@
+{
+    "User": [
+        {
+            "age": "24",
+            "appointment": "05/06/2023",
+            "attendance": "95",
+            "course": "Electrical Engineering",
+            "email": "tokyoghoul@hotdog.com",
+            "lastTested": "06/08/2022",
+            "mentalHealth": "85",
+            "name": "Welt",
+            "occupation": "counsellor",
+            "picture": "/images/welt.webp",
+            "role": "counsellor",
+            "trimester": "Y6S1",
+            "userId": "1800797"
+        },
+        {
+            "age": "18",
+            "appointment": "01/02/2023",
+            "attendance": "82",
+            "course": "Software Engineering",
+            "email": "abc@hotdog.com",
+            "lastTested": "02/03/2022",
+            "mentalHealth": "63",
+            "name": "Johnny",
+            "occupation": "counsellor",
+            "picture": "/images/jingyuan.webp",
+            "role": "counsellor",
+            "trimester": "Y5S2",
+            "userId": "1800795"
+        },
+        {
+            "age": "23",
+            "appointment": "03/05/2023",
+            "attendance": "92",
+            "course": "Computer Science",
+            "email": "nuggets@hotdog.com",
+            "lastTested": "04/07/2022",
+            "mentalHealth": "78",
+            "name": "Gepard",
+            "occupation": "counsellor",
+            "picture": "/images/gepard.webp",
+            "role": "student",
+            "trimester": "Y4S3",
+            "userId": "1800796"
+        }
+    ],
+    "Appointment": [
+        {
+            "clientId": "3HmScHfOlTiE96UwjspK",
+            "counsellorId": "vIU1bq80hBhgU1orlptF",
+            "date": "11/2/2023",
+            "time": "10:30 AM",
+            "title": "Unable to sleep"
+        },
+        {
+            "clientId": "460m1Ov1fwi50Bh6dlc0",
+            "counsellorId": "Lee Zong Heng",
+            "date": "11/2/2023",
+            "time": "10:30 AM",
+            "title": "Trauma"
+        },
+        {
+            "clientId": "vIU1bq80hBhgU1orlptF",
+            "counsellorId": "Goh Whey Whern",
+            "date": "11/2/2023",
+            "time": "10:30 AM",
+            "title": "Sleepless nights"
+        }
+    ],
+    "Session": [
+        {
+            "appointmentId": "hyXHTR1aZqSk6SEEYFYS",
+            "summaryText": "Lorem Ipsum I dont know what to write posum 6",
+            "clientId": "uYSA6hK2ZXwEjzFsKt1l",
+            "counsellorId": "SCRifyGneGhdewInVtor"
+        },
+        {
+            "appointmentId": "hyXHTR1aZqSk6SEEYFYS",
+            "summaryText": "Lorem Ipsum I dont know what to write posum 7",
+            "clientId": "uYSA6hK2ZXwEjzFsKt1l",
+            "counsellorId": "SCRifyGneGhdewInVtor"
+        },
+        {
+            "appointmentId": "hyXHTR1aZqSk6SEEYFYS",
+            "summaryText": "Lorem Ipsum I dont know what to write posum 8",
+            "clientId": "uYSA6hK2ZXwEjzFsKt1l",
+            "counsellorId": "SCRifyGneGhdewInVtor"
+        },
+        {
+            "appointmentId": "hyXHTR1aZqSk6SEEYFYS",
+            "summaryText": "Lorem Ipsum I dont know what to write posum 9",
+            "clientId": "uYSA6hK2ZXwEjzFsKt1l",
+            "counsellorId": "SCRifyGneGhdewInVtor"
+        }
+    ],
+    "Mental Health": [
+        {
+            "date": "11/2/2023",
+            "score": "40",
+            "userId": "uYSA6hK2ZXwEjzFsKt1l"
+        },
+        {
+            "date": "12/2/2023",
+            "score": "66",
+            "userId": "uYSA6hK2ZXwEjzFsKt1l"
+        },
+        {
+            "date": "13/2/2023",
+            "score": "88",
+            "userId": "uYSA6hK2ZXwEjzFsKt1l"
+        }
+    ]
+}

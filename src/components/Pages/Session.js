@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../Pages/Session.css';
 import Title from "../Title";
 import SessionHistory from "../Session/SessionHistory";
+import { readData } from '../CRUD/CRUD';
 
-export default function Session({ role }) {
+export default function Session({ user }) {
+
+  const [session, setSession] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const readSession = await readData("Session", user.role === 'student' ? 'clientId' : 'counsellorId', user.uniqueId);
+      setSession(readSession)
+    };
+    fetchData();
+  }, []);
+  const [show, setShow] = useState(false);
+  const showModal = (e) => {
+    setShow(!show);
+  };
 
   const sessionDetail = [{
     studentId: '180010',
-    name:'Jingyuan',
+    name: 'Jingyuan',
     date: '01/03/2023',
     time: '10:30AM',
     title: 'Diagnosed with depression',
@@ -18,7 +33,7 @@ export default function Session({ role }) {
   },
   {
     studentId: '180011',
-    name:'Gepard',
+    name: 'Gepard',
     date: '02/02/2023',
     time: '11:30AM',
     title: 'Follow up session',
@@ -29,7 +44,7 @@ export default function Session({ role }) {
   },
   {
     studentId: '180001',
-    name:'Welt',
+    name: 'Welt',
     date: '01/01/2023',
     time: '12:30AM',
     title: 'Traumatic recovery therapy',
@@ -44,8 +59,8 @@ export default function Session({ role }) {
       <Title>Session History</Title>
       <div class="contentContainer">
         <SessionHistory
-          sessionDetail={sessionDetail}
-          role={role}
+          sessionDetail={session}
+          role={user.role}
           isProfile={false}
         />
       </div>

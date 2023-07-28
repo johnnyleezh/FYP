@@ -3,7 +3,7 @@ import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-function Navbar({ role, changeRole }) {
+function Navbar({ user, changeUser }) {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -26,7 +26,7 @@ function Navbar({ role, changeRole }) {
 
 
   //Navigation for Counsellor
-  if (role == 'counsellor') {
+  if (user.role == 'counsellor') {
     return (
       <>
         <nav className='navbar'>
@@ -67,13 +67,13 @@ function Navbar({ role, changeRole }) {
                 </Link>
               </li>
             </ul>
-            {button && <Button buttonStyle='btn--outline' onClick={changeRole}>Counsellor</Button>}
+            {button && <Button buttonStyle='btn--outline' onClick={changeUser}>Counsellor</Button>}
           </div>
         </nav>
       </>
     );
   }
-  else if (role == 'student') { 
+  else if (user.role == 'student') {
     //Navigation for Student
     return (
       <>
@@ -98,15 +98,6 @@ function Navbar({ role, changeRole }) {
               </li>
               <li className='nav-item'>
                 <Link
-                  to='/appointment'
-                  className='nav-links'
-                  onClick={closeMobileMenu}
-                >
-                  Appointment
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link
                   to='/session'
                   className='nav-links'
                   onClick={closeMobileMenu}
@@ -124,7 +115,7 @@ function Navbar({ role, changeRole }) {
                 </Link>
               </li>
             </ul>
-            {button && <Button buttonStyle='btn--outline' onClick={changeRole} >Student</Button>}
+            {button && <Button buttonStyle='btn--outline' onClick={changeUser} >Student</Button>}
           </div>
         </nav>
       </>
