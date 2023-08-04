@@ -5,23 +5,23 @@ const createData = async (table, obtainedData) => {
     const createDataRef = collection(db, table) //table = "Users"/"Appointment"
     await addDoc(createDataRef, obtainedData);
 
-    console.log("Create Data Complete!\n" + obtainedData)
+    console.log("Create Data Complete!\n", obtainedData)
 }
 
 const readData = async (table, column, uniqueId) => {
+
     const readDataRef = collection(db, table);
     const q = query(readDataRef, where(column, "==", uniqueId));
     const data = await getDocs(q);
 
     if (!data.empty) {
         const dataMap = data.docs.map((doc) => ({ ...doc.data(), uniqueId: doc.id }));
-        console.log("Read Data from " + table + " Complete!\n", dataMap);
+        // console.log("Read Data from " + table + " Complete!\n", dataMap);
         return dataMap
     } else {
-        console.log("No data found for table =", table);
+        // console.log("No data found for table =", table);
     }
-    console.log(data)
-};
+}
 
 const readSpecificData = async (table, uniqueId) => {
     const readDataRef = collection(db, table);
@@ -33,15 +33,35 @@ const readSpecificData = async (table, uniqueId) => {
         const foundData = dataMap.find((item) => item.uniqueId === uniqueId);
 
         if (!foundData) {
-            console.log("No data found for uniqueId = " + uniqueId + " for " + table);
+            // console.log("No data found for uniqueId = " + uniqueId + " for " + table);
+            return null
         } else {
-            console.log("Read Data with Where from " + table + " Complete!\n", foundData);
+            // console.log("Read Data with Where from " + table + " Complete!\n", foundData);
             return foundData
         }
     } else {
         console.log("No data found for table =", table);
+        return null
     }
-    console.log(data);
+};
+
+const readTableData = async (table) => {
+    try {
+        const readDataRef = collection(db, table);
+        const data = await getDocs(readDataRef);
+
+        if (!data.empty) {
+            const dataMap = data.docs.map((doc) => ({ ...doc.data(), uniqueId: doc.id }));
+            // console.log("Read data from table " + table + " is complete!", dataMap)
+            return dataMap;
+        } else {
+            // console.log("No data found for table =", table);
+            return null;
+        }
+    } catch (error) {
+        // console.error("Error while reading data:", error);
+        return null;
+    }
 };
 
 const updateData = async (table, uniqueId, data) => {
@@ -61,4 +81,4 @@ const deleteData = async (table, uniqueId) => {
     console.log("Delete Data Complete!\n" + specificRow);
 }
 
-export { createData, readData, updateData, deleteData, readSpecificData };
+export { createData, readData, updateData, deleteData, readSpecificData, readTableData };

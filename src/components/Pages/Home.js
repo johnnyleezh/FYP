@@ -10,16 +10,22 @@ import { readData, updateData, deleteData, readSpecificData } from '../CRUD/CRUD
 
 function Home({ user }) {
 
+  const [mentalHealth, setMentalHealth] = useState([])
+
   if (user.role == 'counsellor') {
     return (
       <div className='body-container'>
-        <CreateTable />
+        {/* <CreateTable />
         <button onClick={() => readData("Appointment", "clientId", "uYSA6hK2ZXwEjzFsKt1l")}>Read</button>
         <button onClick={() => readSpecificData("User", "uYSA6hK2ZXwEjzFsKt1l")}>Specific Read</button>
         <button onClick={() => updateData("Appointment", "UxJtluYkOx6SYrjf65aY", { title: "Gamer addict symdrome" })}>Update</button>
-        <button onClick={() => deleteData("Appointment", "")}>Delete</button>
+        <button onClick={() => deleteData("Appointment", "")}>Delete</button> */}
         <Title>Counsellor Home</Title>
-        <Monitor />
+        <Monitor
+          user={user}
+          isOpen={true}
+          mental={(e) => { setMentalHealth(e) }}
+        />
       </div>
     );
   }
@@ -28,6 +34,7 @@ function Home({ user }) {
       <div className='body-container'>
         <Title>Student Home</Title>
         <StudentProfile
+          role={'student'}
           user={user}
           isProfile={true}
         />

@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import QuestionnaireOption from '../Questionnaire/QuestionnaireOption'
 import Title from '../Title'
 
-function MentalHealthTest() {
+function MentalHealthTest({user}) {
   return (
     <div className='body-container'>
       <Title>Mental Health Test</Title>
       <QuestionnaireOption
+      user={user}
       />
     </div>
   )

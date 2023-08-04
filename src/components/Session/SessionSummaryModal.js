@@ -1,21 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import './SessionSummaryModal.css';
+import { readSpecificData } from "../CRUD/CRUD";
 
-function SessionSummaryModal(props) {
+function SessionSummaryModal({ detail, counsellor, mentalHealth, onClose, show }) {
 
-    const date = props.date;
-    const counsellor = props.counsellor;
-    const title = props.title;
-    const description = props.description
-    const show = props.show
-
-    const onClose = (e) => {
-        props.onClose && props.onClose(e);
-    };
+    const [score, setScore] = useState([])
 
     if (!show) {
         return null;
+    }
+
+    const fetchScore = async () => {
+        const fetchData = await readSpecificData("Mental Health", detail.healthId);
+        setScore(fetchData)
     }
 
     return (
@@ -39,20 +37,22 @@ function SessionSummaryModal(props) {
                     </div>
                     <div className="summaryMiddle">
                         <div className="summaryTextBox">
-                            {date}
+                            {detail.date}
                         </div>
                         <div className="summaryTextBox">
-                            {counsellor}
+                            {counsellor.name}
                         </div>
                         <div className="summaryTextBox">
-                            {title}
+                            {detail.title}
                         </div>
-                        <div className="summaryDescription">
-                            {description}
+                        <div className="summaryDescription" style={{ whiteSpace: "pre-wrap" }}>
+                            {detail.summaryText}
                         </div>
                     </div>
                     <div className="summaryRight">
-                        Third
+                        <p>Mental Health Score</p>
+                        <p style={{fontSize:"4rem"}}>{mentalHealth.score}%</p>
+                        <p>Recorded on: {mentalHealth.date}</p>
                     </div>
                 </div>
             </div>

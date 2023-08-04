@@ -1,12 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Questionnaire.css'
 import Questions from "../../Questionnaires/MentalHealthTest.json"
+import { format } from "date-fns";
+import { createData } from '../CRUD/CRUD';
+import { create } from '@mui/material/styles/createTransitions';
 
-function Questionnaire({ questionType }) {
+function Questionnaire({ questionType, user }) {
 
     const [standardQuestions, setStandardQuestions] = useState(
         questionType === 0 ? Questions["StandardQuestions"] : Questions["FollowUpQuestions"]
     );
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const year = today.getFullYear();
+    const formattedDate = `${day}/${month}/${year}`;
+
+    const [mentalHealth, setMentalHealth] = useState({
+        // date: formattedDate,
+        // time: format(today, "h:mm a"),
+        // score: calculateScore(),
+        // userId: user.uniqueId,
+    })
+
+    const createMentalHealth = (calculatedScore) => {
+        if (showScore) {
+            const data = {
+                date: formattedDate,
+                time: format(today, "hh:mm:ss a"),
+                score: calculatedScore,
+                userId: user.uniqueId,
+            }
+            createData("Mental Health", data)
+        }
+    }
 
     const answerOptions = [
         { answerText: '1 - Not at all', isCorrect: 5 },
@@ -32,10 +59,14 @@ function Questionnaire({ questionType }) {
         }
     };
 
-    const calculateScore = () => {
+    console.log()
+
+    useEffect(() => {
+        // Calculate the score and update the totalScore state whenever rawScore changes
         const calculatedScore = Math.round((rawScore / (standardQuestions.length * 5)) * 100);
-        return calculatedScore
-    };
+        setTotalScore(calculatedScore);
+        createMentalHealth(calculatedScore)
+    }, [rawScore]);
 
 
     return (
@@ -44,7 +75,7 @@ function Questionnaire({ questionType }) {
                 <div>
                     <div className='rawScore-section' style={{ textAlign: "center" }}>
                         <div style={{ fontSize: "2rem" }}>Mental Health Score</div>
-                        <div style={{ fontSize: "3rem" }}>{calculateScore()}%</div>
+                        <div style={{ fontSize: "3rem" }}>{totalScore}%</div>
                     </div>
                 </div>
             ) : (

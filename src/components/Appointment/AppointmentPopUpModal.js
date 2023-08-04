@@ -7,6 +7,7 @@ import Edit from './AppointmentEdit';
 import Record from './AppointmentRecord';
 import Create from './AppointmentCreate';
 import { readData, readSpecificData } from '../CRUD/CRUD';
+import { LatestScore } from '../CRUD/ReadScore';
 
 function AppointmentPopUpModal({ isOpen, onClose, user, detail, createOpen, studentDetail }) {
 
@@ -14,12 +15,27 @@ function AppointmentPopUpModal({ isOpen, onClose, user, detail, createOpen, stud
     const [editOpen, setEditOpen] = useState(false)
     const [recordOpen, setRecordOpen] = useState(false)
     const [counsellor, setCounsellor] = useState([])
-
+    const [appointmentDetail, setAppointmentDetail] = useState(detail)
+    const [mentalHealth, setMentalHealth] = useState([])
     const fetchCounsellor = async () => {
-        const fetchData = await readSpecificData("User", detail.counsellorId);
-        setCounsellor(fetchData)
+        const data = await readSpecificData('User', detail.counsellorId);
+        setCounsellor(data);
     };
 
+    useEffect(() => {
+        if (detail) {
+            fetchCounsellor();
+            // fetchMentalHealth();
+        }
+    }, []);
+
+    const fetchData = async () => {
+        const data = await readSpecificData("Appointment", detail.uniqueId)
+        setAppointmentDetail(data)
+    }
+    useEffect(() => {
+        if (detail) { fetchData() }
+    }, [detail]);
     const MODAL_STYLES = {
         position: 'fixed',
         top: '50%',
@@ -46,14 +62,12 @@ function AppointmentPopUpModal({ isOpen, onClose, user, detail, createOpen, stud
         backgroundColor: 'rgba(0, 0, 0, .7)',
         zIndex: 1000,
     }
-
     if (!isOpen) {
         document.getElementById('mainBody').style.overflow = 'auto'
         return null
     }
     else if (!createOpen) {
         document.getElementById('mainBody').style.overflow = 'hidden'
-        fetchCounsellor()
         return ReactDOM.createPortal(
             <>
                 <div style={OVERLAY_STYLES}>
@@ -62,21 +76,22 @@ function AppointmentPopUpModal({ isOpen, onClose, user, detail, createOpen, stud
                             <Row
                                 isOpen={isOpen}
                                 detail={studentDetail}
+                                mental={(e) => { setMentalHealth(e) }}
                             ></Row>
                             <Detail
                                 isOpen={detailOpen}
                                 onEdit={() => { setDetailOpen(false); setEditOpen(true) }}
                                 onRecord={() => { setDetailOpen(false); setRecordOpen(true) }}
-                                onClose={onClose}
-                                detail={detail}
+                                onClose={onClose} // Pass the onClose prop here to the Detail component
+                                detail={appointmentDetail}
                                 counsellor={counsellor}
                             />
-                            <Edit isOpen={editOpen} onClose={() => { setEditOpen(false); setDetailOpen(true) }}
-                                detail={detail}
+                            <Edit isOpen={editOpen} onClose={() => { fetchData(); setEditOpen(false); setDetailOpen(true); }}
+                                detail={appointmentDetail}
                                 counsellor={counsellor}
                             />
-                            <Record isOpen={recordOpen} onClose={() => { setRecordOpen(false); setDetailOpen(true) }}
-                                detail={detail}
+                            <Record isOpen={recordOpen} onClose={() => { onClose() }}
+                                onCloseRecord={() => { setRecordOpen(false); setDetailOpen(true); }} detail={appointmentDetail} counsellor={counsellor} mentalHealth={mentalHealth}
                             />
                         </div>
                     </div>
