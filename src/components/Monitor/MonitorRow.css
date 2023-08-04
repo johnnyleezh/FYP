@@ -42,6 +42,11 @@
     margin-top: 1.5em
 }
 
+.message {
+    font-size: 1em;
+    margin-top: 6em
+}
+
 .link {
     color: black;
 }

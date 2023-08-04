@@ -19,6 +19,7 @@ body {
   opacity: 1;
   visibility: visible;
 }
+
 .modal.off {
   opacity: 0;
   visibility: hidden;
@@ -26,31 +27,38 @@ body {
   transform: scale(0.33);
   box-shadow: 1rem 0 0 rgba(0, 0, 0, 0.2);
 }
+
 @supports (offset-rotation: 0deg) {
   offset-rotation: 0deg;
   offset-path: path("M 250,100 S -300,500 -700,-200");
+
   .modal.off {
     offset-distance: 100%;
   }
 }
+
 @media (prefers-reduced-motion) {
   .modal {
     offset-path: none;
   }
 }
+
 .modal h2 {
   border-bottom: 1px solid #ccc;
   padding: 1rem;
   margin: 0;
 }
+
 .modal .content {
   padding: 1rem;
 }
+
 .modal .actions {
   border-top: 1px solid #ccc;
   background: #eee;
   padding: 0.5rem 1rem;
 }
+
 .modal .actions button {
   border: 0;
   background: #78f89f;
@@ -59,37 +67,44 @@ body {
   font-size: 0.8rem;
   line-height: 1;
 }
+
 #centered-toggle-button {
   position: absolute;
 }
-.content{
+
+.content {
   width: 100%;
 }
+
 .summaryLeft {
-  flex:1;
+  flex: 1;
   text-align: right;
   padding-right: 10px;
 }
 
 .summaryMiddle {
-  flex:4;
+  flex: 4;
   text-align: left;
   padding-left: 10px;
 }
 
 .summaryRight {
-  flex:1.5;
+  padding-top: 4.5rem;
+  flex: 1.5;
+  align-items: center;
 }
 
-.summaryDescription{
+.summaryDescription {
   background-color: white;
   height: 10rem;
   margin: 1rem 1rem 1rem 0;
 }
-.summaryTitle{
+
+.summaryTitle {
   margin: 1rem 0 0 0;
 }
-.summaryTextBox{
+
+.summaryTextBox {
   background-color: white;
   margin: 1rem 1rem 0 0;
 }

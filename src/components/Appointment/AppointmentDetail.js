@@ -1,30 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import AppointmentCancel from './AppointmentCancel';
-import { readData, readSpecificData } from '../CRUD/CRUD';
+import { deleteData } from '../CRUD/CRUD';
 
 function AppointmentDetail({ isOpen, onClose, onEdit, onRecord, detail, counsellor }) {
 
   const [appointmentDetails, setAppointmentDetails] = useState(detail)
   const [cancelOpen, setCancelOpen] = useState(false)
-  // const [counsellor, setCounsellor] = useState([])
- 
-  // useEffect(() => {
-  //   const fetchCounsellor = async () => {
-  //     const fetchData = await readSpecificData("User", detail.counsellorId);
-  //     setCounsellor(fetchData)
-  //   };
-  //   fetchCounsellor();
-  // }, []);
+  useEffect(() => {
+    // Perform any logic here that needs to happen when detail changes
+    // You can access the updated detail prop here
+    // For example:
+    setAppointmentDetails(detail)
+    console.log('Updated detail:', detail);
+  }, [detail]);
 
-  const apptCancel = () => {
-    //Back end stuff for CRUD Delete
-
-
-    onClose()
+  const cancelAppt = () => {
+    deleteData("Appointment", detail.uniqueId)
   }
-
+  const apptCancel = () => {
+    cancelAppt();
+    onClose();
+  };
   if (!isOpen) return null
-
   return (
     <div>
       <div style={{ backgroundColor: 'beige', marginTop: '1rem', padding: '1rem' }}>
@@ -41,10 +38,10 @@ function AppointmentDetail({ isOpen, onClose, onEdit, onRecord, detail, counsell
             </button>
           </div>
           <div style={{ flex: 1 }}>
-            <p>{appointmentDetails.title}</p>
+            <p>{detail.title}</p>
             <p>{counsellor.name}</p>
-            <p>{appointmentDetails.date}</p>
-            <p>{appointmentDetails.time}</p>
+            <p>{detail.date}</p>
+            <p>{detail.time}</p>
           </div>
         </div>
       </div>

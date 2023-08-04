@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Questionnaire from './Questionnaire'
 
-function QuestionnaireOption() {
+function QuestionnaireOption({user}) {
 
     const [isOpen, setIsOpen] = useState(false);
     const [type, setType] = useState()
@@ -31,7 +31,7 @@ function QuestionnaireOption() {
     else
         return (
             <div>
-                <Questionnaire questionType={type} />
+                <Questionnaire questionType={type} user={user} />
             </div>
         )
 }

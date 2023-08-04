@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
+import { updateData, deleteData } from '../CRUD/CRUD'
 
 function AppointmentEdit({ isOpen, onClose, detail, editedDetail, counsellor }) {
-
-    const updateDetail = () => {
-
-    }
 
     const [editDetails, setEditDetails] = useState(detail)
 
@@ -16,9 +13,12 @@ function AppointmentEdit({ isOpen, onClose, detail, editedDetail, counsellor }) 
         }));
     };
 
+    const updateDetail = async () => {
+        await updateData('Appointment', editDetails.uniqueId, editDetails)
+    }
+
     const handleSubmit = () => {
-        editedDetail(editDetails); // Call the editedDetail prop with edited data
-        // editDetails()
+        updateDetail();
         onClose();
     };
 

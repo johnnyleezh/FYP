@@ -5,20 +5,36 @@ import AppointmentPopUpModal from './AppointmentPopUpModal';
 import SessionHistoryRow from '../Session/SessionHistoryRow';
 import { readData, readSpecificData } from '../CRUD/CRUD';
 
-function AppointmentList({ detail, user }) {
-console.log(" this is from appointmentlist ",user)
+function AppointmentList({ user }) {
   const [createOpen, setCreateOpen] = useState(false)
+  const [list, setList] = useState([])
+
+  const fetchData = async () => {
+    const fetchData = await readData("Appointment", user.role === 'student' ? 'clientId' : 'counsellorId', user.uniqueId);
+    setList(fetchData)
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const rowDisplay = () => {
-      const rowDetail = [];
-      for (let i = 0; i < detail.length; i++) {
-        rowDetail.push(
+    if (list) {
+      const rowList = [];
+      for (let i = 0; i < list.length; i++) {
+        rowList.push(
           <Row
-            detail={detail[i]}
+            detail={list[i]}
             openProfile={true}
+            onClose={() => { fetchData() }}
           />
         )
       }
-      return rowDetail
+      return rowList
+    }
+    else {
+      return <div style={{ fontSize: '1.5rem', textAlign: 'center' }}>You have no upcoming appointments.</div>
+    }
   }
 
   return (
@@ -40,10 +56,10 @@ console.log(" this is from appointmentlist ",user)
       {rowDisplay()}
       <AppointmentPopUpModal
         isOpen={createOpen}
-        onClose={() => { setCreateOpen(false) }}
+        onClose={() => { setCreateOpen(false); fetchData() }}
         createOpen={createOpen}
         user={user}
-        detail={detail}
+        list={list}
       />
     </div>
   )

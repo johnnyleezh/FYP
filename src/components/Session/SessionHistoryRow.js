@@ -15,7 +15,10 @@ function SessionHistoryRow({ detail, role, isProfile }) {
 
     const fetchMentalHealthData = async () => {
         const readMentalHealth = await readSpecificData("Mental Health", detail.healthId);
-        setMentalHealth(readMentalHealth)
+        if (readMentalHealth) { setMentalHealth(readMentalHealth) }
+        else {
+            setMentalHealth(0)
+        }
     };
     const fetchClientData = async () => {
         const readClient = await readSpecificData("User", detail.clientId);
@@ -43,14 +46,13 @@ function SessionHistoryRow({ detail, role, isProfile }) {
                             <p className="data">{detail.title}</p>
                         </div>
                         <div className="sessionHistoryColumn" style={{ flex: 1 }}>
-                            <p className="data">{detail.score}</p>
+                            <p className="data">{mentalHealth.score}%</p>
                         </div>
                     </div>
                     <SessionSummaryModal onClose={showModal} show={show}
-                        date={detail.date}
-                        counsellor={detail.counsellor}
-                        title={detail.title}
-                        description={detail.description}
+                        counsellor={counsellor}
+                        detail={detail}
+                        mentalHealth={mentalHealth}
                     />
                 </div>
             )
@@ -71,13 +73,11 @@ function SessionHistoryRow({ detail, role, isProfile }) {
                         <div className="sessionHistoryColumn" style={{ flex: 2 }}>
                             <p className="data">{detail.title}</p>
                         </div>
-
                     </div>
                     <SessionSummaryModal onClose={showModal} show={show}
-                        date={detail.date}
-                        counsellor={counsellor.name}
-                        title={detail.title}
-                        description={detail.summaryText}
+                        counsellor={counsellor}
+                        detail={detail}
+                        mentalHealth={mentalHealth}
                     />
                 </div>
             )
@@ -122,10 +122,9 @@ function SessionHistoryRow({ detail, role, isProfile }) {
                         </div>
                     </div>
                     <SessionSummaryModal onClose={showModal} show={show}
-                        date={detail.date}
-                        counsellor={counsellor.name}
-                        title={detail.title}
-                        description={detail.summaryText}
+                        counsellor={counsellor}
+                        detail={detail}
+                        mentalHealth={mentalHealth}
                     />
                 </div>
             )

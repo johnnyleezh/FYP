@@ -3,17 +3,19 @@ import './AppointmentList.css';
 import AppointmentPopUpModal from './AppointmentPopUpModal';
 import { readSpecificData } from '../CRUD/CRUD';
 
-function AppointmentListRow({ detail, openProfile }) {
-
+function AppointmentListRow({ detail, openProfile, onClose }) {
     const [client, setClient] = useState([])
-
-    useEffect(() => {
-      const fetchData = async () => {
+    const fetchData = async () => {
         const fetchData = await readSpecificData("User", detail.clientId);
         setClient(fetchData)
-      };
-      fetchData(); 
+    };
+    useEffect(() => {
+        fetchData();
     }, []);
+
+    useEffect(() => {
+        fetchData();
+    }, [detail]);
 
     const [isOpen, setIsOpen] = useState(false);
     const [message, setMessage] = useState('Hello');
@@ -55,7 +57,7 @@ function AppointmentListRow({ detail, openProfile }) {
             <AppointmentPopUpModal
                 isOpen={isOpen}
                 createOpen={!isOpen}
-                onClose={() => { setIsOpen(false) }}
+                onClose={() => { setIsOpen(false); onClose(); fetchData() }}
                 studentDetail={client}
                 detail={detail}
             />

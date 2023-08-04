@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const readUser = await readSpecificData("User", "SCRifyGneGhdewInVtor");
+      const readUser = await readSpecificData("User", "KQE0CQ7lk0Y9SabrgPz7");
       setUser(readUser)
     };
     fetchData();
@@ -40,7 +40,7 @@ function App() {
     }
     else {
       const fetchData = async () => {
-        const readUser = await readSpecificData("User", "SCRifyGneGhdewInVtor");
+        const readUser = await readSpecificData("User", "KQE0CQ7lk0Y9SabrgPz7");
         setUser(readUser)
       };
       fetchData();
@@ -69,9 +69,15 @@ function App() {
             render={(props) => <Session user={user} />}
           />
           <Route path='/students' component={StudentList} />
-          <Route path='/profile' component={Profile} />
+          <Route
+            path='/profile'
+            render={(props) => <Profile counsellor={user} />}
+          />
           <Route path='/helpresource' component={HelpResource} />
-          <Route path='/MentalHealthTest' component={MentalHealthTest} />
+          <Route 
+          path='/MentalHealthTest'
+          render={(props) => <MentalHealthTest user={user} />}
+          />
         </Switch>
       </Router>
     </>

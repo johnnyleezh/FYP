@@ -10,18 +10,11 @@ export default function Appointment({ user }) {
 
   const [appointment, setAppointment] = useState([])
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const fetchData = await readData("Appointment", user.role === 'student' ? 'clientId' : 'counsellorId', user.uniqueId);
-      setAppointment(fetchData)
-    };
-    fetchData();
-  }, []);
+
   return (
     <div className='body-container'>
       <Title>{user.role == 'counsellor' ? 'Appointment' : 'Appointment History'}</Title>
       <AppointmentList
-        detail={appointment}
         user={user} />
     </div>
   )
