@@ -9,21 +9,23 @@ function QuestionnaireOption({user}) {
     if (!isOpen)
         return (
             <div className='quizSelectionContainer'>
-                <div className='quizSelectionTitle'>
-                    Please select your test
-                </div>
-                <div className='quizSelectionOption'>
-                    <div className='answerContainer'>
-                        <img src="/images/MentalHealth/Depression.webp" className="photo" alt="Student Photo" width="140em" height="180em"></img>
-                        <button className='answer' style={{ fontSize: '1.5rem', justifyContent: 'center' }} onClick={() => { setIsOpen(true); setType(0) }}>
-                            Mental Health Test
-                        </button>
+                <div style={{backgroundColor:'#FBE8A6'}}>
+                    <div className='quizSelectionTitle'>
+                        Please select your test
                     </div>
-                    <div className='answerContainer'>
-                        <img src="/images/MentalHealth/Stress.jpg" className="photo" alt="Student Photo" width="140em" height="180em"></img>
-                        <button className='answer' style={{ fontSize: '1.5rem', justifyContent: 'center' }} onClick={() => { setIsOpen(true); setType(1) }}>
-                            Follow-up Test
-                        </button>
+                    <div className='quizSelectionOption'>
+                        <div className='answerContainer'>
+                            <img src="/images/MentalHealth/Depression.webp" className="photo" alt="Student Photo" width="140em" height="180em"></img>
+                            <button className='answer' style={{ fontSize: '1.5rem', justifyContent: 'center' }} onClick={() => { setIsOpen(true); setType(0) }}>
+                                Mental Health Test
+                            </button>
+                        </div>
+                        <div className='answerContainer'>
+                            <img src="/images/MentalHealth/Stress.jpg" className="photo" alt="Student Photo" width="140em" height="180em"></img>
+                            <button className='answer' style={{ fontSize: '1.5rem', justifyContent: 'center' }} onClick={() => { setIsOpen(true); setType(1) }}>
+                                Follow-up Test
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

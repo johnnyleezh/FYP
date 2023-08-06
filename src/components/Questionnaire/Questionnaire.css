@@ -1,12 +1,13 @@
 .quizSelectionContainer {
-    background-color: #fff;
+    background-color: #F4976C;
     width: 35rem;
     min-height: 100px;
     height: min-content;
     border-radius: 15px;
     box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.75);
     justify-content: space-evenly;
-    margin-top: 1rem;
+    margin: 1rem;
+    padding:0.5rem;
 }
 
 .quizSelectionTitle{

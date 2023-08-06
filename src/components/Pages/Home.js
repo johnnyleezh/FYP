@@ -20,7 +20,7 @@ function Home({ user }) {
         <button onClick={() => readSpecificData("User", "uYSA6hK2ZXwEjzFsKt1l")}>Specific Read</button>
         <button onClick={() => updateData("Appointment", "UxJtluYkOx6SYrjf65aY", { title: "Gamer addict symdrome" })}>Update</button>
         <button onClick={() => deleteData("Appointment", "")}>Delete</button> */}
-        <Title>Counsellor Home</Title>
+        <Title>Home</Title>
         <Monitor
           user={user}
           isOpen={true}
@@ -32,10 +32,11 @@ function Home({ user }) {
   else if (user.role == 'student') {
     return (
       <div className='body-container'>
-        <Title>Student Home</Title>
+        <Title>Home</Title>
         <StudentProfile
           role={'student'}
           user={user}
+          profile={user}
           isProfile={true}
         />
       </div>
@@ -44,7 +45,7 @@ function Home({ user }) {
   else {
     return (
       <div className='hero-container'>
-        <Title>Academic Advisor Home</Title>
+        <Title>Home</Title>
         <Monitor />
       </div>
     );

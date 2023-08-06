@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Row from '../Monitor/MonitorRow';
+import { Button } from '../Button';
 import SessionHistory from '../Session/SessionHistory'
 import AppointmentPopUpModal from '../Appointment/AppointmentPopUpModal';
 import { readData, createData, deleteData } from '../CRUD/CRUD';
 
-function StudentProfile({ role, user, isProfile, counsellor }) {
+function StudentProfile({ role, profile, isProfile, user }) {
+  const [button, setButton] = useState(true);
   const [isOpen, setIsOpen] = useState(false)
   const [detail, setDetail] = useState([])
   const [mentalHealth, setMentalHealth] = useState([])
@@ -17,26 +19,26 @@ function StudentProfile({ role, user, isProfile, counsellor }) {
   const formattedDate = `${day}/${month}/${year}`;
 
   const fetchData = async () => {
-    if (user) {
+    if (profile) {
       const type = (role == 'counsellor' ? "Session" : "Appointment")
-      const readDetail = await readData(type, "clientId", user.uniqueId);
+      const readDetail = await readData(type, "clientId", profile.uniqueId);
       setDetail(readDetail)
     }
   };
   useEffect(() => {
     fetchData();
     isMonitoring();
-  }, [user, counsellor]);
+  }, [profile, user]);
 
   const isMonitoring = async () => {
-    if (user && counsellor) {
+    if (profile && user) {
       try {
         // Fetch data from the "Monitor" collection where the "counsellorId" matches the counsellor's uniqueId
-        const fetchData = await readData("Monitor", "counsellorId", counsellor.uniqueId);
-  
+        const fetchData = await readData("Monitor", "counsellorId", user.uniqueId);
+
         // Find the entry in fetchData that matches the "user.uniqueId"
-        const filterData = fetchData.find((data) => data.clientId === user.uniqueId);
-  
+        const filterData = fetchData.find((data) => data.clientId === profile.uniqueId);
+
         if (filterData) {
           // If a match is found, set the monitor state to the filtered data
           setMonitor(filterData);
@@ -51,13 +53,13 @@ function StudentProfile({ role, user, isProfile, counsellor }) {
       }
     }
   };
-  
+
 
   const createMonitor = () => {
     const monitor = {
       date: formattedDate,
-      clientId: user.uniqueId,
-      counsellorId: counsellor.uniqueId
+      clientId: profile.uniqueId,
+      counsellorId: user.uniqueId
     }
     createData("Monitor", monitor);
     isMonitoring();
@@ -70,58 +72,82 @@ function StudentProfile({ role, user, isProfile, counsellor }) {
     }
   }
 
-  const profileBtn = () => {
-    if (role == 'counsellor') {
+  const pageBtn = () => {
+    if (user.role == 'counsellor') {
       if (monitor) {
         return (
-          <button className='btn' style={{ position: 'absolute', right: '5em', top: '15em' }}
-            onClick={deleteMonitor}
-          >
-            Stop monitoring
-          </button>
+          <>
+            <div className='pageBtn'>
+              {button && <Button
+                buttonStyle='btn--outline'
+                onClick={deleteMonitor}>
+                Stop monitoring
+              </Button>}
+            </div>
+          </>
         )
       }
       return (
-        <button className='btn' style={{ position: 'absolute', right: '5em', top: '15em' }}
-          onClick={createMonitor}
-        >
-          Monitor
-        </button>
+        <>
+          <div className='pageBtn'>
+            {button && <Button
+              buttonStyle='btn--outline'
+              onClick={createMonitor}>
+              Monitor
+            </Button>}
+          </div>
+        </>
       )
     }
-    else if (role == 'student') {
-      return (
-        <button className='btn' style={{ position: 'absolute', right: '5em', top: '15em' }}
-          onClick={() => { setIsOpen(true) }}
-        >
-          Create Appointment
-        </button>
-      )
+    else if (user.role == 'student') {
+      if (user.uniqueId == profile.uniqueId) {
+        return (
+          <>
+            <div className='pageBtn'>
+              {button && <Button
+                buttonStyle='btn--outline'
+                onClick={() => { setIsOpen(true) }}>
+                Create Appointment
+              </Button>}
+            </div>
+          </>
+        )
+      }
     }
   }
-
-  if (user) {
+  const outerLayer = {
+    backgroundColor: '#F4976C',
+    width: '95%',
+    boxShadow: '0px 5px 10px 0px rgba(0,0,0,0.75)',
+    marginBottom: '1rem'
+  }
+  if (profile) {
     return (
-      <div className='contentContainer'>
-        {profileBtn()}
-        <Row
-          isOpen={true}
-          detail={user}
-          mental={(e) => { setMentalHealth(e) }}
-        />
-        <h1>{role == 'counsellor' ? "Session History" : "Upcoming Appointment"}</h1>
-        <SessionHistory
-          sessionDetail={detail}
-          role={role}
-          isProfile={isProfile}
-        />
+      <div style={outerLayer}>
+        <div className='contentContainer'>
+          {pageBtn()}
+          <Row
+            isOpen={true}
+            detail={profile}
+            mental={(e) => { setMentalHealth(e) }}
+          />
+        </div >
+        <h1 style={{ backgroundColor: "#F4976C", textDecoration:'underline' }}>{role == 'counsellor' ? "Session History" : "Upcoming Appointment"}</h1>
+        <div>
+          <SessionHistory
+            sessionDetail={detail}
+            role={role}
+            isProfile={isProfile}
+          />
+        </div>
         <AppointmentPopUpModal
           isOpen={isOpen}
           onClose={() => { fetchData(); setIsOpen(false) }}
           createOpen={true}
-          user={user}
+          user={profile}
         />
-      </div >
+
+      </div>
     )
   }
   else return null

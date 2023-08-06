@@ -14,7 +14,7 @@ export default function Session({ user }) {
       setSession(readSession)
     };
     fetchData();
-  }, []);
+  }, [user]);
   const [show, setShow] = useState(false);
   const showModal = (e) => {
     setShow(!show);
@@ -57,13 +57,11 @@ export default function Session({ user }) {
   return (
     <div className='body-container'>
       <Title>Session History</Title>
-      <div class="contentContainer">
         <SessionHistory
           sessionDetail={session}
           role={user.role}
           isProfile={false}
         />
-      </div>
     </div>
   )
 }

@@ -3,11 +3,13 @@ import './StudentList.css';
 import Title from "../Title";
 import StudentList from '../StudentList/StudentList';
 
-export default function Students() {
+export default function Students({ user }) {
   return (
     <div className='body-container'>
       <Title>Student List</Title>
-      <StudentList />
+      <StudentList
+        user={user}
+      />
     </div>
   )
 }

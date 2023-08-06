@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import '../Pages/Appointment.css'
 import Title from "../Title"
 import AppointmentList from '../Appointment/AppointmentList'
 import { db } from '../../firebase-config'

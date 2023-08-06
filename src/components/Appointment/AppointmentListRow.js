@@ -29,17 +29,19 @@ function AppointmentListRow({ detail, openProfile, onClose }) {
                             <img src={client.picture} className="photo" alt="Student Photo" width="140em" height="180em"></img>
                         </div>
                         <div className='columnMiddleContainer'>
-                            <div style={{ flex: 1.5 }}>
+                            <div style={{ flex: '1.5', display: 'flex', flexDirection: 'column' }}>
                                 <div className="textBoxLeft">Name: </div>
                                 <div className="textBoxLeft">Student ID: </div>
                                 <div className="textBoxLeft">Course: </div>
                                 <div className="textBoxLeft">Trimester:</div>
+                                <div className="textBoxLeft">CGPA:</div>
                             </div>
-                            <div style={{ flex: 3 }}>
+                            <div style={{ flex: '3', display: 'flex', flexDirection: 'column' }}>
                                 <div className="textBoxRight">{client.name}</div>
                                 <div className="textBoxRight">{client.userId}</div>
                                 <div className="textBoxRight">{client.course}</div>
                                 <div className="textBoxRight">{client.trimester}</div>
+                                <div className="textBoxRight">{client.CGPA}</div>
                             </div>
                         </div>
                     </div>
@@ -57,7 +59,7 @@ function AppointmentListRow({ detail, openProfile, onClose }) {
             <AppointmentPopUpModal
                 isOpen={isOpen}
                 createOpen={!isOpen}
-                onClose={() => { setIsOpen(false); onClose(); fetchData() }}
+                onClose={() => {fetchData(); setIsOpen(false); onClose();  }}
                 studentDetail={client}
                 detail={detail}
             />

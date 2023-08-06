@@ -30,7 +30,7 @@ function SessionHistoryRow({ detail, role, isProfile }) {
         fetchClientData();
     }, []);
     const [show, setShow] = useState(false);
-    const showModal = (e) => {
+    const showModal = () => {
         setShow(!show);
     };
 
@@ -46,7 +46,7 @@ function SessionHistoryRow({ detail, role, isProfile }) {
                             <p className="data">{detail.title}</p>
                         </div>
                         <div className="sessionHistoryColumn" style={{ flex: 1 }}>
-                            <p className="data">{mentalHealth.score}%</p>
+                            <p className="data">{mentalHealth.score ? mentalHealth.score + '%' : ''}</p>
                         </div>
                     </div>
                     <SessionSummaryModal onClose={showModal} show={show}
@@ -118,7 +118,7 @@ function SessionHistoryRow({ detail, role, isProfile }) {
                             <p className="data">{detail.title}</p>
                         </div>
                         <div className="sessionHistoryColumn" style={{ flex: 1 }}>
-                            <p className="data">{mentalHealth.score}%</p>
+                        <p className="data">{mentalHealth.score ? mentalHealth.score + '%' : ''}</p>
                         </div>
                     </div>
                     <SessionSummaryModal onClose={showModal} show={show}

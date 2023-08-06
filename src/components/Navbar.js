@@ -1,29 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
+import PsychologyIcon from '@mui/icons-material/Psychology';
 import './Navbar.css';
 
 function Navbar({ user, changeUser }) {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
-  const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
-
-  const showButton = () => {
-    if (window.innerWidth <= 960) {
-      setButton(false);
-    } else {
-      setButton(true);
-    }
-  };
-
-  useEffect(() => {
-    showButton();
-  }, []);
-
-  window.addEventListener('resize', showButton);
-
+  const handleClick = () => setClick(click);
 
   //Navigation for Counsellor
   if (user.role == 'counsellor') {
@@ -31,9 +16,9 @@ function Navbar({ user, changeUser }) {
       <>
         <nav className='navbar'>
           <div className='navbar-container'>
-            <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+            <Link to='/' className='navbar-logo' >
               UTAR
-              <i class='fab fa-typo3' />
+              <PsychologyIcon fontSize='4rem' />
             </Link>
             <div className='menu-icon' onClick={handleClick}>
               <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -43,7 +28,6 @@ function Navbar({ user, changeUser }) {
                 <Link
                   to='/appointment'
                   className='nav-links'
-                  onClick={closeMobileMenu}
                 >
                   Appointment
                 </Link>
@@ -52,7 +36,6 @@ function Navbar({ user, changeUser }) {
                 <Link
                   to='/session'
                   className='nav-links'
-                  onClick={closeMobileMenu}
                 >
                   Session
                 </Link>
@@ -61,7 +44,6 @@ function Navbar({ user, changeUser }) {
                 <Link
                   to='/students'
                   className='nav-links'
-                  onClick={closeMobileMenu}
                 >
                   Student List
                 </Link>
@@ -69,7 +51,7 @@ function Navbar({ user, changeUser }) {
             </ul>
             {button && <Button buttonStyle='btn--outline' onClick={changeUser}>Counsellor</Button>}
           </div>
-        </nav>
+        </nav >
       </>
     );
   }
@@ -79,9 +61,9 @@ function Navbar({ user, changeUser }) {
       <>
         <nav className='navbar'>
           <div className='navbar-container'>
-            <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+            <Link to='/' className='navbar-logo' >
               UTAR
-              <i class='fab fa-typo3' />
+              <PsychologyIcon fontSize='4rem' />
             </Link>
             <div className='menu-icon' onClick={handleClick}>
               <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -91,7 +73,6 @@ function Navbar({ user, changeUser }) {
                 <Link
                   to='/helpresource'
                   className='nav-links'
-                  onClick={closeMobileMenu}
                 >
                   Help Resources
                 </Link>
@@ -100,7 +81,6 @@ function Navbar({ user, changeUser }) {
                 <Link
                   to='/session'
                   className='nav-links'
-                  onClick={closeMobileMenu}
                 >
                   Session
                 </Link>
@@ -109,7 +89,6 @@ function Navbar({ user, changeUser }) {
                 <Link
                   to='/MentalHealthTest'
                   className='nav-links'
-                  onClick={closeMobileMenu}
                 >
                   Mental Health Test
                 </Link>
@@ -127,15 +106,26 @@ function Navbar({ user, changeUser }) {
       <>
         <nav className='navbar'>
           <div className='navbar-container'>
-            <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+            <Link to='/students' className='navbar-logo' >
               UTAR
-              <i class='fab fa-typo3' />
+              <PsychologyIcon fontSize='4rem' />
             </Link>
             <div className='menu-icon' onClick={handleClick}>
               <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
             </div>
+            <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+              <li className='nav-item'>
+                <Link
+                  to='/students'
+                  className='nav-links'
+                >
+                  Student List
+                </Link>
+              </li>
+            </ul>
+            {button && <Button buttonStyle='btn--outline' onClick={changeUser}>Academic Advisor</Button>}
           </div>
-        </nav>
+        </nav >
       </>
     );
   }

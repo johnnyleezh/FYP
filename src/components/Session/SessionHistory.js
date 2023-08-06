@@ -21,18 +21,24 @@ function SessionHistory({ sessionDetail, role, isProfile }) {
         else {
             if (role == 'student') {
                 if (isProfile) {
-                    return <div style={{ fontSize: '1.5rem', textAlign: 'center' }}>You have no upcoming appointment</div>
+                    return <div style={{ fontSize: '1.5rem', textAlign: 'center', backgroundColor: '#FBE8A6' }}>You have no upcoming appointment</div>
                 } else {
-                    return <div style={{ fontSize: '1.5rem', textAlign: 'center' }}>No Session Recorded</div>
+                    return <div style={{ fontSize: '1.5rem', textAlign: 'center', backgroundColor: '#FBE8A6' }}>No Session Recorded</div>
                 }
             }
             else {
-                return <div style={{ fontSize: '1.5rem', textAlign: 'center' }}>No Session Recorded</div>
+                return <div style={{ fontSize: '1.5rem', textAlign: 'center', backgroundColor: '#FBE8A6' }}>No Session Recorded</div>
             }
 
         }
         return sessionRows; // Return the array of components
     };
+    const outerLayer = {
+        backgroundColor: '#F4976C',
+        width: '95%',
+        boxShadow: '0px 5px 10px 0px rgba(0,0,0,0.75)',
+        marginBottom: '1rem'
+    }
 
     if (role == "counsellor") {
         if (isProfile) {
@@ -57,7 +63,7 @@ function SessionHistory({ sessionDetail, role, isProfile }) {
         }
         else {
             return (
-                <div>
+                <div style={outerLayer}>
                     <div className="sessionHistoryContainer">
                         <div className="sessionHistoryHeader">
                             <div className="sessionHistoryColumn" style={{ flex: 1 }}>
@@ -109,7 +115,7 @@ function SessionHistory({ sessionDetail, role, isProfile }) {
         }
         else {
             return (
-                <div>
+                <div style={outerLayer}>
                     <div className="sessionHistoryContainer">
                         <div className="sessionHistoryHeader">
                             <div className="sessionHistoryColumn" style={{ flex: 1 }}>

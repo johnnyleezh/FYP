@@ -17,8 +17,10 @@ function SessionSummaryModal({ detail, counsellor, mentalHealth, onClose, show }
     }
 
     return (
-        <div className="modal" id="modal">
-            <h2>Session Summary</h2>
+        <div className="modal">
+            <div style={{textAlign:'center'}}>
+                <h1>Session Summary</h1>
+            </div>
             <div className="content">
                 <div class="sessionSummaryContainer">
                     <div className="summaryLeft">
@@ -51,8 +53,8 @@ function SessionSummaryModal({ detail, counsellor, mentalHealth, onClose, show }
                     </div>
                     <div className="summaryRight">
                         <p>Mental Health Score</p>
-                        <p style={{fontSize:"4rem"}}>{mentalHealth.score}%</p>
-                        <p>Recorded on: {mentalHealth.date}</p>
+                        <p style={{fontSize:"4rem"}}>{mentalHealth.score ? mentalHealth.score : 0}%</p>
+                        <p>{mentalHealth.date ? "Recorded on: "+ mentalHealth.date : "Record not found"}</p>
                     </div>
                 </div>
             </div>
