@@ -1,16 +1,14 @@
 .apptContainer {
-    background-color: white;
-    width: 90%;
-    margin: 1rem;
+    background-color: #303C6C;
+    margin: 0 1.7rem 1rem 1.7rem;
 }
 
 .apptListHeader {
     display: flex;
-    padding:1rem;
+    padding:0.75rem;
     font-size: 1.5em;
-    border-style: outset;
-    background-color: rgb(79, 73, 73);
-    color: aliceblue;
+    /* margin-bottom: 0.1rem; */
+    background-color: #F4976C;
     text-align: center;
 }
 
@@ -27,11 +25,12 @@
 }
 
 .apptListContent {
+    background-color: #FBE8A6;
     display: flex;
     font-size: 1.1em;
-    border-style: outset;
+    margin-bottom: 0.1rem;
+    /* border-style: outset; */
     cursor: pointer;
-    background-color: beige;
 }
 
 .apptColumnProfileContent {
@@ -41,7 +40,7 @@
 .apptColumnDateContent {
     flex: 1;
     text-align: center;
-    border-right-style: outset;
+    /* border-right-style: outset; */
 }
 
 .apptColumnTitleContent {
@@ -60,7 +59,7 @@
     border: 0;
     background: #78f89f;
     border-radius: 5px;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1.5rem;
     font-size: 1rem;
     line-height: 1;
     cursor: pointer;
@@ -77,7 +76,7 @@
     border: 0;
     background: #de2446;
     border-radius: 5px;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1.5rem;
     font-size: 1rem;
     line-height: 1;
     cursor: pointer;
@@ -87,8 +86,8 @@
     border: 0;
     background: #e6e6e6;
     border-radius: 5px;
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
     line-height: 1;
     cursor: pointer;
 }

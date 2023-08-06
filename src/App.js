@@ -31,21 +31,27 @@ function App() {
   const [role, setRole] = useState(isCounsellor)
 
   const changeUser = () => {
-    if (user.role == isCounsellor) { //change to student
+    if (user.role === 'counsellor') { // Change to student
       const fetchData = async () => {
         const readUser = await readSpecificData("User", "uYSA6hK2ZXwEjzFsKt1l");
-        setUser(readUser)
+        setUser(readUser);
       };
       fetchData();
-    }
-    else {
+    } else if (user.role === 'student') { // Change to academic advisor
+      const fetchData = async () => {
+        const readUser = await readSpecificData("User", "ehVrVYtpuMwQwed7kepk");
+        setUser(readUser);
+      };
+      fetchData();
+    } else { // Change back to counsellor
       const fetchData = async () => {
         const readUser = await readSpecificData("User", "KQE0CQ7lk0Y9SabrgPz7");
-        setUser(readUser)
+        setUser(readUser);
       };
       fetchData();
     }
-  }
+  };
+
 
   return (
     <>
@@ -68,15 +74,18 @@ function App() {
             path='/session'
             render={(props) => <Session user={user} />}
           />
-          <Route path='/students' component={StudentList} />
+          <Route
+            path='/students'
+            render={(props) => <StudentList user={user} />}
+          />
           <Route
             path='/profile'
-            render={(props) => <Profile counsellor={user} />}
+            render={(props) => <Profile user={user} />}
           />
           <Route path='/helpresource' component={HelpResource} />
-          <Route 
-          path='/MentalHealthTest'
-          render={(props) => <MentalHealthTest user={user} />}
+          <Route
+            path='/MentalHealthTest'
+            render={(props) => <MentalHealthTest user={user} />}
           />
         </Switch>
       </Router>

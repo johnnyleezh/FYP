@@ -24,7 +24,7 @@ function AppointmentDetail({ isOpen, onClose, onEdit, onRecord, detail, counsell
   if (!isOpen) return null
   return (
     <div>
-      <div style={{ backgroundColor: 'beige', marginTop: '1rem', padding: '1rem' }}>
+      <div style={{ backgroundColor: 'beige', marginTop: '0rem', padding: '1rem' }}>
         <div style={{ display: 'flex', fontSize: '1.4rem' }}>
           <div style={{ flex: 1, textAlign: 'right', paddingRight: '1rem' }}>
             <p>Title:</p>
@@ -44,19 +44,20 @@ function AppointmentDetail({ isOpen, onClose, onEdit, onRecord, detail, counsell
             <p>{detail.time}</p>
           </div>
         </div>
-      </div>
-      <div>
-        <div className="actions">
-          <button className="toggle-button" onClick={onRecord}>
-            Record Session
-          </button>
+
+        <div style={{display:'flex', flexDirection:'row', width: '30rem',  margin:'auto'}}>
+        <div className="cancel" style={{flex:1, alignItems:'flex-start'}}>
+            <button className="toggle-button" onClick={() => { setCancelOpen(true) }}>
+              Cancel Appointment
+            </button>
+          </div>
+          <div className="actions" style={{flex:1}}>
+            <button className="toggle-button" onClick={onRecord}>
+              Record Session
+            </button>
+          </div>
         </div>
-        <div className="cancel">
-          <button className="toggle-button" onClick={() => { setCancelOpen(true) }}>
-            Cancel Appointment
-          </button>
-        </div>
-        <div className="neutral" style={{ position: 'absolute', right: '1rem', bottom: '1rem' }}>
+        <div className="neutral" style={{ position: 'absolute', right: '3rem', bottom: '2.5rem' }}>
           <button className="toggle-button" onClick={onClose}>
             Return
           </button>

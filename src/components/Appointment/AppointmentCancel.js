@@ -7,14 +7,13 @@ function AppointmentCancel({ isOpen, onClose, onCancel }) {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        backgroundColor: '#FFF',
-        padding: '1rem',
-        height: '30%',
+        backgroundColor: '#303C6C',
+        padding: '0.25rem',
         zIndex: 1000,
         width: '25%',
-        margin: '1rem',
         textAlign: 'center',
-        overflowY: 'auto'
+        overflowY: 'auto',
+        boxShadow: '0px 5px 10px 0px rgba(0,0,0,0.75)',
     }
 
     const OVERLAY_STYLES = {
@@ -26,8 +25,13 @@ function AppointmentCancel({ isOpen, onClose, onCancel }) {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, .7)',
+        backgroundColor: 'rgba(0, 0, 0, .2)',
         zIndex: 1000,
+    }
+
+    const content = {
+        backgroundColor: '#FBE8A6',
+        padding: '1rem'
     }
 
     if (!isOpen) return null
@@ -35,16 +39,18 @@ function AppointmentCancel({ isOpen, onClose, onCancel }) {
     return (
         <div style={OVERLAY_STYLES}>
             <div style={MODAL_STYLES}>
-                Confirm to cancel appointment?
-                <div className="actions">
-                    <button className="toggle-button" onClick={onCancel}>
-                        Yes, I confirm
-                    </button>
-                </div>
-                <div className="cancel">
-                    <button className="toggle-button" onClick={onClose}>
-                        No
-                    </button>
+                <div style={content}>
+                    Confirm to cancel appointment?
+                    <div className="actions">
+                        <button className="toggle-button" onClick={onCancel}>
+                            Yes, I confirm
+                        </button>
+                    </div>
+                    <div className="cancel">
+                        <button className="toggle-button" onClick={onClose}>
+                            No
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

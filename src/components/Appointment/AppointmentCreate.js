@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { createData, readTableData } from '../CRUD/CRUD';
+import { createData, readData, readSpecificData, readTableData } from '../CRUD/CRUD';
+import SearchBar from '../CRUD/SearchBar';
+import TextField from '@mui/material/TextField';
+import DatePicker from '../CRUD/DatePicker'
+import TimePicker from '../CRUD/TimePicker';
+import format from 'date-fns/format';
 
 function AppointmentCreate({ isOpen, onClose, user }) {
     const [createApptDetails, setCreateApptDetails] = useState({
@@ -11,7 +16,28 @@ function AppointmentCreate({ isOpen, onClose, user }) {
         venue: '',
     });
     const [studentList, setStudentList] = useState([]);
+    const [counsellorList, setCounsellorList] = useState([]);
+    const [selectStudent, setSelectStudent] = useState([]);
+    const [selectedProfile, setSelectedProfile] = useState([])
 
+    const obtainStudentList = async () => {
+        const list = await readData('User', 'role', 'student')
+        if (list) {
+            setStudentList(list)
+        }
+    }
+
+    const obtainCounsellorList = async () => {
+        const list = await readData('User', 'role', 'counsellor')
+        if (list) {
+            setCounsellorList(list)
+        }
+    }
+
+    const fetchUsers = async () => {
+        const data = await readTableData('User');
+        setSelectStudent(data);
+    };
     const handleChange = (e) => {
         const { name, value } = e.target;
         setCreateApptDetails((prevDetails) => ({
@@ -20,19 +46,45 @@ function AppointmentCreate({ isOpen, onClose, user }) {
         }));
         console.log(createApptDetails)
     };
+    const handleDateChange = (value) => {
+        setCreateApptDetails((prevDetails) => ({
+            ...prevDetails,
+            date: value.format('DD/MM/YYYY'),
+        }));
+    };
+    const handleTimeChange = (value) => {
+        setCreateApptDetails((prevDetails) => ({
+            ...prevDetails,
+            time: value.format('h:mm A')
+        }));
+    };
+
+    const obtainedProfile = (value) => {
+        setSelectedProfile(value);
+        if (value) {
+            if (user.role == 'counsellor')
+                setCreateApptDetails((prevDetails) => ({
+                    ...prevDetails,
+                    clientId: value.uniqueId,
+                }));
+            else {
+                setCreateApptDetails((prevDetails) => ({
+                    ...prevDetails,
+                    counsellorId: value.uniqueId,
+                }));
+            }
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            const data = await readTableData('User');
-            setStudentList(data);
-        };
-        fetchData();
+        fetchUsers();
+        obtainStudentList();
+        obtainCounsellorList();
     }, []);
 
     useEffect(() => {
         if (user.role == 'counsellor') {
-            const selectedStudent = studentList.find((student) => student.userId === createApptDetails.clientId);
-            console.log("This is the selected user.", selectedStudent);
+            const selectedStudent = selectStudent.find((student) => student.userId === createApptDetails.clientId);
             if (selectedStudent) {
                 setCreateApptDetails((prevDetails) => ({
                     ...prevDetails,
@@ -40,8 +92,7 @@ function AppointmentCreate({ isOpen, onClose, user }) {
                 }));
             }
         } else {
-            const selectedStudent = studentList.find((student) => student.userId === createApptDetails.counsellorId);
-            console.log("This is the selected user.", selectedStudent);
+            const selectedStudent = selectStudent.find((student) => student.userId === createApptDetails.counsellorId);
             if (selectedStudent) {
                 setCreateApptDetails((prevDetails) => ({
                     ...prevDetails,
@@ -49,50 +100,74 @@ function AppointmentCreate({ isOpen, onClose, user }) {
                 }));
             }
         }
-    }, [user.role == 'counsellor' ? createApptDetails.clientId : createApptDetails.counsellorId, studentList]);
+    }, [user.role == 'counsellor' ? createApptDetails.clientId : createApptDetails.counsellorId, selectStudent]);
 
     const createUser = async () => {
-        createData('Appointment', createApptDetails);
+        if (createApptDetails.clientId && createApptDetails.counsellorId) {
+            createData('Appointment', createApptDetails);
+            onClose();
+        }
     };
 
     if (!isOpen) return null;
 
 
     return (
-        <div>
-            <div style={{ backgroundColor: 'beige', marginTop: '1rem', padding: '1rem' }}>
-                <div style={{ display: 'flex', fontSize: '1.4rem' }}>
-                    <div style={{ flex: 1, textAlign: 'right', paddingRight: '1rem' }}>
-                        <p>Title:</p>
-                        {user.role === 'counsellor' ? <p>Student ID:</p> : <p>Counsellor ID:</p>}
-                        <p>Date:</p>
-                        <p>Time:</p>
+        <div style={{ backgroundColor: 'beige', padding: '2.5rem', height: '100%' }}>
+            <div style={{ margin: '1rem' }}>
+                <h1 style={{ textDecoration: 'underline' }}>Create Appointment</h1>
+            </div>
+            <div style={{ padding: '1rem', height: '20rem', display: 'flex', fontSize: '1.4rem' }}>
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ flex: 1 }}>
+                        <TextField
+                            fullWidth
+                            placeholder='Title'
+                            name="title"
+                            sx={{ backgroundColor: 'white' }}
+                            label={'Title'}
+                            onChange={handleChange}
+                        />
                     </div>
                     <div style={{ flex: 1 }}>
-                        <input type="text" name="title" placeholder="Title" onChange={handleChange} style={{ fontSize: '1.4rem' }} />
-                        <input
-                            type="text"
-                            name={user.role === 'counsellor' ? 'clientId' : 'counsellorId'}
-                            placeholder={user.role === 'counsellor' ? 'Student ID' : 'Counsellor ID'}
-                            onChange={handleChange}
-                            style={{ fontSize: '1.4rem' }}
+                        <SearchBar
+                            sx={{ width: '100%', backgroundColor: 'white' }}
+                            label={user.role === 'counsellor' ? 'Student ID/Name' : 'Counsellor ID/Name'}
+                            user={user}
+                            data={user.role === 'counsellor' ? studentList : counsellorList}
+                            selectedProfile={(e) => obtainedProfile(e)}
                         />
-                        <input type="text" name="date" placeholder="Date" onChange={handleChange} style={{ fontSize: '1.4rem' }} />
-                        <input type="text" name="time" placeholder="Time" onChange={handleChange} style={{ fontSize: '1.4rem' }} />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                        <DatePicker
+                            label="Date"
+                            sx={{ backgroundColor: 'white', width: '100%' }}
+                            onChange={handleDateChange}
+                        />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                        <TimePicker
+                            sx={{ backgroundColor: 'white', width: '100%' }}
+                            label={'Time'}
+                            onChange={handleTimeChange}
+                        />
                     </div>
                 </div>
+            </div >
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <div className="cancel" style={{ flex: 1 }}>
+                    <button className="toggle-button" onClick={onClose}>
+                        Cancel
+                    </button>
+                </div>
+                <div className="actions" style={{ flex: 1 }}>
+                    <button className="toggle-button" onClick={() => { createUser(); }}>
+                        Submit
+                    </button>
+                </div>
+
             </div>
-            <div className="actions">
-                <button className="toggle-button" onClick={() => { createUser(); onClose(); }}>
-                    Submit
-                </button>
-            </div>
-            <div className="cancel">
-                <button className="toggle-button" onClick={onClose}>
-                    Cancel
-                </button>
-            </div>
-        </div>
+        </div >
     );
 }
 

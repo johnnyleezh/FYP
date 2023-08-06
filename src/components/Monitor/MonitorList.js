@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../App.css';
 import { Button } from '../Button';
-import './MonitorList.css';
 import MonitorRow from './MonitorRow';
 import { readData, readSpecificData } from '../CRUD/CRUD';
 
@@ -29,7 +28,7 @@ function Monitor({ user }) {
 
   useEffect(() => {
     fetchMonitor();
-  }, []);
+  }, [user]);
 
   const monitorRowDisplay = () => {
     if (list) {
@@ -47,7 +46,7 @@ function Monitor({ user }) {
     }
     else {
       return (
-        <div style={{marginBottom:'1rem'}}>
+        <div style={{ marginBottom: '1rem', backgroundColor: '#FBE8A6', padding: '2rem 0rem' }}>
           <h2>Monitor List is empty</h2>
         </div>
       )
@@ -55,9 +54,11 @@ function Monitor({ user }) {
   }
 
   return (
-    <div class="contentContainer">
-      <h1 className="monitorTitle">Monitor List</h1>
-      {monitorRowDisplay()}
+    <div style={{ width: "95%", backgroundColor: '#F4976C', margin: '0rem auto 1rem auto', boxShadow: '0px 5px 10px 0px rgba(0,0,0,0.75)' }}>
+      <h1 style={{ margin: '2rem 0 1rem 0' }}>Monitor List</h1>
+      <div class="contentContainer">
+        {monitorRowDisplay()}
+      </div>
     </div>
   );
 }

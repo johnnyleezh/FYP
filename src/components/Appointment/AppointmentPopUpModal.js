@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Row from '../Monitor/MonitorRow';
-import '../Session/SessionHistory.css'
+// import '../Session/SessionHistory.css'
 import Detail from './AppointmentDetail';
 import Edit from './AppointmentEdit';
 import Record from './AppointmentRecord';
@@ -41,13 +41,15 @@ function AppointmentPopUpModal({ isOpen, onClose, user, detail, createOpen, stud
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        backgroundColor: '#FFF',
-        // padding: '2rem',
-        height: '87%',
+        backgroundColor: '#303C6C',
+        padding: '0.5rem',
+        maxHeight: '95%',
         zIndex: 1000,
-        width: '90%',
-        margin: '1rem',
-        overflowY: 'auto'
+        maxWidth: '95%',
+        overflowY: 'auto',
+        boxShadow: '0px 5px 10px 0px rgba(0,0,0,0.75)',
+        display: 'flex',
+        flexDirection: 'column',
     }
 
     const OVERLAY_STYLES = {
@@ -59,7 +61,7 @@ function AppointmentPopUpModal({ isOpen, onClose, user, detail, createOpen, stud
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, .7)',
+        backgroundColor: 'rgba(0, 0, 0, .3)',
         zIndex: 1000,
     }
     if (!isOpen) {
@@ -72,27 +74,29 @@ function AppointmentPopUpModal({ isOpen, onClose, user, detail, createOpen, stud
             <>
                 <div style={OVERLAY_STYLES}>
                     <div style={MODAL_STYLES}>
-                        <div style={{ padding: '1rem' }}>
-                            <Row
-                                isOpen={isOpen}
-                                detail={studentDetail}
-                                mental={(e) => { setMentalHealth(e) }}
-                            ></Row>
-                            <Detail
-                                isOpen={detailOpen}
-                                onEdit={() => { setDetailOpen(false); setEditOpen(true) }}
-                                onRecord={() => { setDetailOpen(false); setRecordOpen(true) }}
-                                onClose={onClose} // Pass the onClose prop here to the Detail component
-                                detail={appointmentDetail}
-                                counsellor={counsellor}
-                            />
-                            <Edit isOpen={editOpen} onClose={() => { fetchData(); setEditOpen(false); setDetailOpen(true); }}
-                                detail={appointmentDetail}
-                                counsellor={counsellor}
-                            />
-                            <Record isOpen={recordOpen} onClose={() => { onClose() }}
-                                onCloseRecord={() => { setRecordOpen(false); setDetailOpen(true); }} detail={appointmentDetail} counsellor={counsellor} mentalHealth={mentalHealth}
-                            />
+                        <div style={{ backgroundColor: "#FBE8A6", padding: '1rem', width: '70rem' }}>
+                            <div style={{ padding: '0.1rem' }}>
+                                <Row
+                                    isOpen={isOpen}
+                                    detail={studentDetail}
+                                    mental={(e) => { setMentalHealth(e) }}
+                                ></Row>
+                                <Detail
+                                    isOpen={detailOpen}
+                                    onEdit={() => { setDetailOpen(false); setEditOpen(true) }}
+                                    onRecord={() => { setDetailOpen(false); setRecordOpen(true) }}
+                                    onClose={onClose} // Pass the onClose prop here to the Detail component
+                                    detail={appointmentDetail}
+                                    counsellor={counsellor}
+                                />
+                                <Edit isOpen={editOpen} onClose={() => { fetchData(); setEditOpen(false); setDetailOpen(true); }}
+                                    detail={appointmentDetail}
+                                    counsellor={counsellor}
+                                />
+                                <Record isOpen={recordOpen} onClose={() => { onClose() }}
+                                    onCloseRecord={() => { setRecordOpen(false); setDetailOpen(true); }} detail={appointmentDetail} counsellor={counsellor} mentalHealth={mentalHealth}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -106,9 +110,7 @@ function AppointmentPopUpModal({ isOpen, onClose, user, detail, createOpen, stud
             <>
                 <div style={OVERLAY_STYLES}>
                     <div style={MODAL_STYLES}>
-                        <div style={{ padding: '1rem' }}>
-                            <Create isOpen={createOpen} onClose={onClose} user={user}></Create>
-                        </div>
+                        <Create isOpen={createOpen} onClose={onClose} user={user}></Create>
                     </div>
                 </div>
             </>,

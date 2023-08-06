@@ -1,11 +1,13 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  font-family: 'PT Sans', sans-serif;
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight: lighter;
 }
 
 html, body{
-  background: url('/images/background.png') center center/cover;
+  /* background: url('/images/background.png') center center/cover; */
+  background-color: #D2FDFF;
   background-repeat: no-repeat;
   background-attachment: fixed;
   height: 100%;

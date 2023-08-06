@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './AppointmentList.css';
 import Row from './AppointmentListRow';
+import { Button } from '../Button';
 import AppointmentPopUpModal from './AppointmentPopUpModal';
 import SessionHistoryRow from '../Session/SessionHistoryRow';
 import { readData, readSpecificData } from '../CRUD/CRUD';
 
 function AppointmentList({ user }) {
+  const [button, setButton] = useState(true);
   const [createOpen, setCreateOpen] = useState(false)
   const [list, setList] = useState([])
 
@@ -16,7 +18,7 @@ function AppointmentList({ user }) {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [user]);
 
   const rowDisplay = () => {
     if (list) {
@@ -33,34 +35,47 @@ function AppointmentList({ user }) {
       return rowList
     }
     else {
-      return <div style={{ fontSize: '1.5rem', textAlign: 'center' }}>You have no upcoming appointments.</div>
+      return <div style={{ fontSize: '1.5rem', textAlign: 'center', backgroundColor: '#FBE8A6' }}>You have no upcoming appointments.</div>
     }
   }
-
+  const outerLayer = {
+    backgroundColor: '#F4976C',
+    width: '95%',
+    boxShadow: '0px 5px 10px 0px rgba(0,0,0,0.75)',
+    marginBottom: '1rem'
+  }
   return (
-    <div className='apptContainer'>
-      <button className='btn' style={{ position: 'absolute', right: '5em', top: '15em' }} onClick={() => { setCreateOpen(true) }}>
-        Create
-      </button>
-      <div className="apptListHeader">
-        <div className="apptColumnProfileHeader">
-          Profile
+    <div style={outerLayer}>
+      <div className='apptContainer'>
+        <>
+          <div className='pageBtn'>
+            {button && <Button
+              buttonStyle='btn--outline'
+              onClick={() => { setCreateOpen(true) }}>
+              Create
+            </Button>}
+          </div>
+        </>
+        <div className="apptListHeader">
+          <div className="apptColumnProfileHeader">
+            Profile
+          </div>
+          <div className="apptColumnDateHeader">
+            Date
+          </div>
+          <div className="apptColumnTitleHeader">
+            Title
+          </div>
         </div>
-        <div className="apptColumnDateHeader">
-          Date
-        </div>
-        <div className="apptColumnTitleHeader">
-          Title
-        </div>
+        {rowDisplay()}
+        <AppointmentPopUpModal
+          isOpen={createOpen}
+          onClose={() => { fetchData(); setCreateOpen(false); }}
+          createOpen={createOpen}
+          user={user}
+          list={list}
+        />
       </div>
-      {rowDisplay()}
-      <AppointmentPopUpModal
-        isOpen={createOpen}
-        onClose={() => { setCreateOpen(false); fetchData() }}
-        createOpen={createOpen}
-        user={user}
-        list={list}
-      />
     </div>
   )
 }
