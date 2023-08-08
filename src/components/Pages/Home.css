@@ -249,7 +249,8 @@ video {
 
 .sessionHistoryColumn {
   /* flex:1; */
-  padding: 1rem
+  padding: 1rem;
+
 }
 
 .sessionHistoryHeader {
@@ -267,6 +268,7 @@ video {
 .sessionHistoryContent {
   display: flex;
   font-size: 1.1em;
+  cursor: pointer;
 }
 
 .sessionHistoryContent.open .sessionHistoryColumn {

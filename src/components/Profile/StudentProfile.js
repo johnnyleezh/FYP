@@ -4,6 +4,7 @@ import { Button } from '../Button';
 import SessionHistory from '../Session/SessionHistory'
 import AppointmentPopUpModal from '../Appointment/AppointmentPopUpModal';
 import { readData, createData, deleteData } from '../CRUD/CRUD';
+import dayjs from 'dayjs';
 
 function StudentProfile({ role, profile, isProfile, user }) {
   const [button, setButton] = useState(true);
@@ -20,11 +21,20 @@ function StudentProfile({ role, profile, isProfile, user }) {
 
   const fetchData = async () => {
     if (profile) {
-      const type = (role == 'counsellor' ? "Session" : "Appointment")
-      const readDetail = await readData(type, "clientId", profile.uniqueId);
-      setDetail(readDetail)
+      const type = role === 'counsellor' ? 'Session' : 'Appointment';
+      const readDetail = await readData(type, 'clientId', profile.uniqueId);
+
+      const sortedDetail = readDetail.slice().sort((a, b) => {
+        const dateA = dayjs(a.date, 'DD/MM/YYYY');
+        const dateB = dayjs(b.date, 'DD/MM/YYYY');
+
+        return dateA.diff(dateB, 'day'); // Sort in ascending order (oldest to newest)
+      });
+
+      setDetail(sortedDetail);
     }
   };
+  
   useEffect(() => {
     fetchData();
     isMonitoring();

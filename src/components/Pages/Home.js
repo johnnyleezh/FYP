@@ -15,8 +15,8 @@ function Home({ user }) {
   if (user.role == 'counsellor') {
     return (
       <div className='body-container'>
-        {/* <CreateTable />
-        <button onClick={() => readData("Appointment", "clientId", "uYSA6hK2ZXwEjzFsKt1l")}>Read</button>
+        {/* <CreateTable /> */}
+        {/* <button onClick={() => readData("Appointment", "clientId", "uYSA6hK2ZXwEjzFsKt1l")}>Read</button>
         <button onClick={() => readSpecificData("User", "uYSA6hK2ZXwEjzFsKt1l")}>Specific Read</button>
         <button onClick={() => updateData("Appointment", "UxJtluYkOx6SYrjf65aY", { title: "Gamer addict symdrome" })}>Update</button>
         <button onClick={() => deleteData("Appointment", "")}>Delete</button> */}

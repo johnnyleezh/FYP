@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SessionSummaryModal from '../Session/SessionSummaryModal'
 import { readSpecificData, readData } from '../CRUD/CRUD';
+import { Link } from 'react-router-dom';
 
 function SessionHistoryRow({ detail, role, isProfile }) {
 
@@ -65,7 +66,17 @@ function SessionHistoryRow({ detail, role, isProfile }) {
                             <p className="data">{detail.date}</p>
                         </div>
                         <div className="sessionHistoryColumn" style={{ flex: 1 }}>
-                            <p className="data">{client.userId}</p>
+                            <p className="data">
+                                <Link
+                                    to={{
+                                        pathname: '/profile',
+                                        search: `?uniqueId=${client.uniqueId}`
+                                    }}
+                                    onDragStart={(e) => { e.preventDefault(); }}
+                                >
+                                    {client.userId}
+                                </Link>
+                            </p>
                         </div>
                         <div className="sessionHistoryColumn" style={{ flex: 1 }}>
                             <p className="data">{client.name}</p>
@@ -79,7 +90,7 @@ function SessionHistoryRow({ detail, role, isProfile }) {
                         detail={detail}
                         mentalHealth={mentalHealth}
                     />
-                </div>
+                </div >
             )
         }
     }
@@ -118,7 +129,7 @@ function SessionHistoryRow({ detail, role, isProfile }) {
                             <p className="data">{detail.title}</p>
                         </div>
                         <div className="sessionHistoryColumn" style={{ flex: 1 }}>
-                        <p className="data">{mentalHealth.score ? mentalHealth.score + '%' : ''}</p>
+                            <p className="data">{mentalHealth.score ? mentalHealth.score + '%' : ''}</p>
                         </div>
                     </div>
                     <SessionSummaryModal onClose={showModal} show={show}

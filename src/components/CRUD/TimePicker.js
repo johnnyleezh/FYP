@@ -4,7 +4,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
-export default function TimePickerValue({ sx, label, time, onChange }) {
+export default function TimePickerValue({ sx, selectedTime, label, time, onChange }) {
     const [value, setValue] = React.useState(time ? dayjs(time, 'h:mm A') : null);
 
     return (

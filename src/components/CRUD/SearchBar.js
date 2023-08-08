@@ -3,11 +3,6 @@ import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-const options = [
-  { name: 'Option 1', id: 0 },
-  { name: 'Option 2', id: 1 },
-];
-
 export default function ControllableStates({ user, data, selectedProfile, sx, label, getProfile }) {
   const [value, setValue] = React.useState(null); // Change initial value to null
   const [inputValue, setInputValue] = React.useState('');

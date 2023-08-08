@@ -10,15 +10,14 @@ export default function DatePickerValue({ sx, label, date, onChange }) {
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={['DatePicker', 'DatePicker']}>
                 <DatePicker
+                    disablePast
                     sx={sx}
                     label={label}
                     value={value}
                     onChange={(e) => onChange(e)}
                     format={'DD/MM/YYYY'}
                 />
-            </DemoContainer>
         </LocalizationProvider>
     );
 }
