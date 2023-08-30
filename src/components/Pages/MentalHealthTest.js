@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
-import QuestionnaireOption from '../Questionnaire/QuestionnaireOption'
-import Title from '../Title'
+import React from 'react';
+import QuizSelection from '../Questionnaire/QuizSelection';
+import Title from '../Title';
 
-function MentalHealthTest({user}) {
+function MentalHealthTest({ user }) {
   return (
     <div className='body-container'>
       <Title>Mental Health Test</Title>
-      <QuestionnaireOption
-      user={user}
-      />
+      <QuizSelection user={user} />
     </div>
-  )
+  );
 }
 
-export default MentalHealthTest
+export default MentalHealthTest;

@@ -31,7 +31,7 @@ function SessionSummaryModal({ detail, counsellor, mentalHealth, onClose, show }
                             <p>Counsellor:</p>
                         </div>
                         <div class="summaryTitle">
-                            <p>Title:</p>
+                            <p>Topic:</p>
                         </div>
                         <div class="summaryTitle">
                             <p>Description:</p>
@@ -45,7 +45,7 @@ function SessionSummaryModal({ detail, counsellor, mentalHealth, onClose, show }
                             {counsellor.name}
                         </div>
                         <div className="summaryTextBox">
-                            {detail.title}
+                            {detail.topic}
                         </div>
                         <div className="summaryDescription" style={{ whiteSpace: "pre-wrap" }}>
                             {detail.summaryText}

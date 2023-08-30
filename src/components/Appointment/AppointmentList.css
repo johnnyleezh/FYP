@@ -46,6 +46,15 @@
 .apptColumnTitleContent {
     flex: 2;
     text-align: center;
+    display:flex;
+    flex-direction: row;
+}
+
+.apptColumnTitleContentColumn {
+    flex: 2;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
 }
 
 .actions {

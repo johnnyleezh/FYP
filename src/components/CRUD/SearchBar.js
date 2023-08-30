@@ -4,8 +4,15 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
 export default function ControllableStates({ user, data, selectedProfile, sx, label, getProfile }) {
-  const [value, setValue] = React.useState(null); // Change initial value to null
+  const [value, setValue] = React.useState(null);
   const [inputValue, setInputValue] = React.useState('');
+
+  const customFilterOptions = (options, params) => {
+    const filtered = options.filter((option) =>
+      (option.userId + " - " + option.name).toLowerCase().includes(params.inputValue.toLowerCase())
+    );
+    return filtered.slice(0, 3); // Limit results to 3
+  };
 
   if (getProfile) {
     return (
@@ -23,6 +30,7 @@ export default function ControllableStates({ user, data, selectedProfile, sx, la
           id="controllable-states-demo"
           options={data}
           sx={sx}
+          filterOptions={customFilterOptions}
           getOptionLabel={(userOption) => userOption.userId + " - " + userOption.name}
           renderInput={(params) => (
             <TextField {...params} label={label} placeholder={label} />
@@ -36,11 +44,8 @@ export default function ControllableStates({ user, data, selectedProfile, sx, la
           )}
         />
       </div>
-
-
-    )
-  }
-  else {
+    );
+  } else {
     return (
       <div>
         <Autocomplete
@@ -56,6 +61,7 @@ export default function ControllableStates({ user, data, selectedProfile, sx, la
           id="controllable-states-demo"
           options={data}
           sx={sx}
+          filterOptions={customFilterOptions}
           getOptionLabel={(userOption) => userOption.userId + " - " + userOption.name}
           renderInput={(params) => <TextField {...params} label={label} placeholder={label} />}
         />

@@ -1,78 +1,96 @@
-import React, { useState, useEffect } from 'react';
-import { createData, deleteData } from '../CRUD/CRUD';
+import React, { useState, useEffect } from "react";
+import { createData, deleteData } from "../CRUD/CRUD";
 
-function AppointmentRecord({ isOpen, onClose, onCloseRecord, detail, counsellor, mentalHealth }) {
-    console.log(mentalHealth)
-    const [recordDetails, setRecordDetails] = useState({
-        appointmentId: detail.uniqueId,
-        clientId: detail.clientId,
-        counsellorId: detail.counsellorId,
-        date: detail.date,
-        healthId: mentalHealth.uniqueId ? mentalHealth.uniqueId : '',
-        title: detail.title
+function AppointmentRecord({
+  isOpen,
+  onClose,
+  onCloseRecord,
+  detail,
+  counsellor,
+  mentalHealth,
+}) {
+  // Initialize state for record details
+  const [recordDetails, setRecordDetails] = useState({
+    ...detail, // Spread all properties from detail
+    healthId: mentalHealth.uniqueId ? mentalHealth.uniqueId : "", // ID of the mental health record, if available
+    summaryText: "", // Initialize summary text as empty
+  });
+
+  // Update recordDetails when detail or mentalHealth changes
+  useEffect(() => {
+    setRecordDetails({
+      ...detail, // Spread all properties from detail
+      healthId: mentalHealth.uniqueId ? mentalHealth.uniqueId : "",
+      summaryText: recordDetails.summaryText, // Preserve existing summaryText
     });
-    console.log("Record received student details", detail)
-    useEffect(() => {
-        setRecordDetails({
-            appointmentId: detail.uniqueId,
-            clientId: detail.clientId,
-            counsellorId: detail.counsellorId,
-            date: detail.date,
-            healthId: mentalHealth.uniqueId ? mentalHealth.uniqueId : '',
-            title: detail.title
-        })
-    }, [detail, mentalHealth]);
-    const handleChange = (e) => {
-        setRecordDetails({
-            ...recordDetails,
-            summaryText: e.target.value
-        });
-        console.log(recordDetails)
-    };
+  }, [detail, mentalHealth]);
 
-    const createSession = () => {
-        createData("Session", recordDetails)
-        deleteData("Appointment", detail.uniqueId)
-        onClose();
-    }
+  // Handle changes in the textarea
+  const handleChange = (e) => {
+    setRecordDetails({
+      ...recordDetails,
+      summaryText: e.target.value,
+    });
+    console.log(recordDetails);
+  };
 
-    if (!isOpen) return null
+  // Create session and delete appointment data
+  const createSession = () => {
+    createData("Session", recordDetails);
+    deleteData("Appointment", detail.uniqueId);
+    onClose();
+  };
 
-    return (
-        <div>
-            <div style={{ backgroundColor: 'beige', marginTop: '0.1rem', padding: '1rem' }}>
-                <div style={{ display: 'flex', fontSize: '1.4rem' }}>
-                    <div style={{ flex: 1, textAlign: 'right', paddingRight: '1rem' }}>
-                        <p>Title:</p>
-                        <p>Counsellor:</p>
-                        <p>Date:</p>
-                    </div>
-                    <div style={{ flex: 1 }}>
-                        <p>{detail.title}</p>
-                        <p>{counsellor.name}</p>
-                        <p>{detail.date}</p>
-                    </div>
-                </div>
-                <div className='recordTextArea'>
-                    <textarea style={{ whiteSpace: "pre-wrap" }} id="w3review" name="w3review" rows="20" cols="120" onChange={handleChange} />
-                </div>
+  // Return null if not open
+  if (!isOpen) return null;
 
-
-                <div className="actions">
-                    <button className="toggle-button" onClick={createSession}>
-                        Submit
-                    </button>
-                </div>
-                <div className="cancel">
-                    <button className="toggle-button" onClick={onCloseRecord}>
-                        Cancel
-                    </button>
-                </div>
-            </div>
+  return (
+    <div>
+      <div
+        style={{
+          backgroundColor: "beige",
+          marginTop: "0.1rem",
+          padding: "1rem",
+        }}
+      >
+        <div style={{ display: "flex", fontSize: "1.4rem" }}>
+          <div style={{ flex: 1, textAlign: "right", paddingRight: "1rem" }}>
+            <p>Topic:</p>
+            <p>Counsellor:</p>
+            <p>Date:</p>
+          </div>
+          <div style={{ flex: 1 }}>
+            <p>{detail.topic}</p>
+            <p>{counsellor.name}</p>
+            <p>{detail.date}</p>
+          </div>
+        </div>
+        {/* Textarea for recording session details */}
+        <div className="recordTextArea">
+          <textarea
+            style={{ whiteSpace: "pre-wrap" }}
+            id="w3review"
+            name="w3review"
+            rows="20"
+            cols="120"
+            onChange={handleChange}
+          />
         </div>
 
-
-    )
+        {/* Submit and Cancel buttons */}
+        <div className="actions">
+          <button className="toggle-button" onClick={createSession}>
+            Submit
+          </button>
+        </div>
+        <div className="cancel">
+          <button className="toggle-button" onClick={onCloseRecord}>
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default AppointmentRecord
+export default AppointmentRecord;

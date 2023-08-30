@@ -1,7 +1,6 @@
-import React from 'react'
+import React from 'react';
 
 function AppointmentCancel({ isOpen, onClose, onCancel }) {
-
     const MODAL_STYLES = {
         position: 'fixed',
         top: '50%',
@@ -13,8 +12,8 @@ function AppointmentCancel({ isOpen, onClose, onCancel }) {
         width: '25%',
         textAlign: 'center',
         overflowY: 'auto',
-        boxShadow: '0px 5px 10px 0px rgba(0,0,0,0.75)',
-    }
+        boxShadow: '0px 5px 10px 0px rgba(0, 0, 0, 0.75)',
+    };
 
     const OVERLAY_STYLES = {
         display: 'flex',
@@ -25,21 +24,21 @@ function AppointmentCancel({ isOpen, onClose, onCancel }) {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, .2)',
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
         zIndex: 1000,
-    }
+    };
 
-    const content = {
+    const contentStyles = {
         backgroundColor: '#FBE8A6',
-        padding: '1rem'
-    }
+        padding: '1rem',
+    };
 
-    if (!isOpen) return null
+    if (!isOpen) return null;
 
     return (
         <div style={OVERLAY_STYLES}>
             <div style={MODAL_STYLES}>
-                <div style={content}>
+                <div style={contentStyles}>
                     Confirm to cancel appointment?
                     <div className="actions">
                         <button className="toggle-button" onClick={onCancel}>
@@ -54,7 +53,7 @@ function AppointmentCancel({ isOpen, onClose, onCancel }) {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default AppointmentCancel
+export default AppointmentCancel;

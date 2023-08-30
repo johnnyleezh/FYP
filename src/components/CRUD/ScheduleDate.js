@@ -7,20 +7,19 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { readData } from './CRUD';
 
+// AutocompleteDatePicker component
 function AutocompleteDatePicker(props) {
     const { options, counsellorId, ...other } = props;
     const [dates, setDates] = useState([]);
 
+    // Fetch schedule data for the given counsellor
     const fetchData = async () => {
-        console.log("This is the datepicker counsellor ID", counsellorId)
         try {
             const data = await readData("Schedule", "userId", counsellorId);
             if (data) {
-                console.log(data)
                 setDates(data); // Update the state with fetched data
-            }
-            else {
-                setDates([])
+            } else {
+                setDates([]);
             }
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -31,6 +30,7 @@ function AutocompleteDatePicker(props) {
         fetchData();
     }, [counsellorId]); // Trigger fetchData when counsellorId changes
 
+    // Generate week options based on fetched schedule dates
     const generateWeekOptions = () => {
         const startOfWeek = dayjs().startOf('week');
         const weekOptions = [];
@@ -45,6 +45,7 @@ function AutocompleteDatePicker(props) {
         return weekOptions;
     };
 
+    // Create an options lookup object to disable certain dates
     const optionsLookup = React.useMemo(
         () =>
             generateWeekOptions().reduce((acc, option) => {
@@ -53,6 +54,7 @@ function AutocompleteDatePicker(props) {
             }, {}),
         [dates, counsellorId], // Include counsellorId as a dependency
     );
+
     return (
         <DatePicker
             format="DD/MM/YYYY" // Set the desired format
@@ -62,10 +64,10 @@ function AutocompleteDatePicker(props) {
             shouldDisableDate={(date) => !optionsLookup[date.startOf('day').toISOString()]}
             {...other}
         />
-
     );
 }
 
+// PickerWithAutocompleteField component
 export default function PickerWithAutocompleteField({ counsellorId, sx, onChange }) {
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>

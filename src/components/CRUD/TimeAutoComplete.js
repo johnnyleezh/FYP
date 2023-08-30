@@ -9,6 +9,7 @@ function TimeAutoComplete({ counsellorId, day, selectedTime, sx, label }) {
     const [inputValue, setInputValue] = React.useState('');
     const [times, setTimes] = useState([]);
 
+    // Define a mapping of day names to numeric day indexes
     const daysMap = {
         Sunday: 0,
         Monday: 1,
@@ -21,11 +22,12 @@ function TimeAutoComplete({ counsellorId, day, selectedTime, sx, label }) {
 
     const fetchData = async () => {
         try {
-
-            const dates = await readData('Schedule', 'userId', counsellorId)
+            // Fetch schedule data for the specified counsellor
+            const dates = await readData('Schedule', 'userId', counsellorId);
 
             if (day !== null) {
                 const numericDay = daysMap[day]; // Convert 'dddd' to numeric day index
+                // Filter times based on the selected day
                 const filteredTimes = dates.filter((obj) => obj.day === String(numericDay));
                 if (filteredTimes.length > 0) {
                     setTimes(filteredTimes);
@@ -40,7 +42,7 @@ function TimeAutoComplete({ counsellorId, day, selectedTime, sx, label }) {
 
     useEffect(() => {
         fetchData();
-    }, [counsellorId, day]);
+    }, [counsellorId, day]); // Fetch data when counsellorId or day changes
 
     return (
         <div>

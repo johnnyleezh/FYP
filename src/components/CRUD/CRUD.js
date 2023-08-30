@@ -1,28 +1,38 @@
-import { db } from '../../firebase-config'
-import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, query, where, } from 'firebase/firestore'
+import { db } from '../../firebase-config';
+import {
+    collection,
+    addDoc,
+    getDocs,
+    updateDoc,
+    deleteDoc,
+    doc,
+    query,
+    where,
+} from 'firebase/firestore';
 
+// Function to create data in the specified table
 const createData = async (table, obtainedData) => {
-    const createDataRef = collection(db, table) //table = "Users"/"Appointment"
+    const createDataRef = collection(db, table);
     await addDoc(createDataRef, obtainedData);
 
-    console.log("Create Data Complete!\n", obtainedData)
-}
+    console.log('Create Data Complete!\n', obtainedData);
+};
 
+// Function to read data from the specified table and column
 const readData = async (table, column, uniqueId) => {
-
     const readDataRef = collection(db, table);
-    const q = query(readDataRef, where(column, "==", uniqueId));
+    const q = query(readDataRef, where(column, '==', uniqueId));
     const data = await getDocs(q);
 
     if (!data.empty) {
         const dataMap = data.docs.map((doc) => ({ ...doc.data(), uniqueId: doc.id }));
-        // console.log("Read Data from " + table + " Complete!\n", dataMap);
-        return dataMap
+        return dataMap;
     } else {
-        // console.log("No data found for table =", table);
+        return null;
     }
-}
+};
 
+// Function to read specific data based on uniqueId
 const readSpecificData = async (table, uniqueId) => {
     const readDataRef = collection(db, table);
     const q = query(readDataRef);
@@ -33,18 +43,16 @@ const readSpecificData = async (table, uniqueId) => {
         const foundData = dataMap.find((item) => item.uniqueId === uniqueId);
 
         if (!foundData) {
-            // console.log("No data found for uniqueId = " + uniqueId + " for " + table);
-            return null
+            return null;
         } else {
-            // console.log("Read Data with Where from " + table + " Complete!\n", foundData);
-            return foundData
+            return foundData;
         }
     } else {
-        console.log("No data found for table =", table);
-        return null
+        return null;
     }
 };
 
+// Function to read all data from a table
 const readTableData = async (table) => {
     try {
         const readDataRef = collection(db, table);
@@ -52,33 +60,42 @@ const readTableData = async (table) => {
 
         if (!data.empty) {
             const dataMap = data.docs.map((doc) => ({ ...doc.data(), uniqueId: doc.id }));
-            // console.log("Read data from table " + table + " is complete!", dataMap)
             return dataMap;
         } else {
-            // console.log("No data found for table =", table);
             return null;
         }
     } catch (error) {
-        // console.error("Error while reading data:", error);
         return null;
     }
 };
 
+// Function to update data in a specific row
 const updateData = async (table, uniqueId, data) => {
     const specificRow = doc(db, table, uniqueId);
     await updateDoc(specificRow, data);
 
-    // const data={field: oof} //data need to pass in object
-
-    console.log("Update Data Complete!\n" + data);
+    console.log('Update Data Complete!\n', data);
 };
 
+// Function to delete data from a specific row
 const deleteData = async (table, uniqueId) => {
+  try {
     const specificRow = doc(db, table, uniqueId);
-    await deleteDoc(specificRow)
+    await deleteDoc(specificRow);
+    console.log('Delete Data Complete!\n', specificRow);
+    return { success: true };
+  } catch (error) {
+    console.log('Error deleting data:', error);
+    return { success: false };
+  }
+};
 
 
-    console.log("Delete Data Complete!\n" + specificRow);
-}
-
-export { createData, readData, updateData, deleteData, readSpecificData, readTableData };
+export {
+    createData,
+    readData,
+    updateData,
+    deleteData,
+    readSpecificData,
+    readTableData,
+};
