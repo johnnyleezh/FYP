@@ -19,6 +19,7 @@ function AppointmentCreate({ isOpen, onClose, user }) {
     service: "",
     facebookLink: "",
     emergencyContact: "",
+    address: "",
     language: "",
     venue: "",
     confirmation: false,
@@ -265,6 +266,25 @@ function AppointmentCreate({ isOpen, onClose, user }) {
               name="emergencyContact"
               sx={{ backgroundColor: "white" }}
               label={"Emergency Contact"}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "row",
+            margin: "0 0.25rem",
+          }}
+        >
+          <div style={rowStyle}>
+            <TextField
+              fullWidth
+              placeholder="Address"
+              name="address"
+              sx={{ backgroundColor: "white" }}
+              label={"Current Address"}
               onChange={handleChange}
             />
           </div>

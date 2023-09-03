@@ -40,7 +40,21 @@ function AppointmentRecord({
     deleteData("Appointment", detail.uniqueId);
     onClose();
   };
+  const titleStyle = {
+    padding: "0.2rem",
+    flex: 1,
+  };
+  const detailStyle = {
+    padding: "0.2rem",
+    flex: 2,
+    textAlign: "left",
+  };
 
+  const contentStyle = {
+    flex: 1,
+    display: "flex",
+    flexDirection: "row",
+  };
   // Return null if not open
   if (!isOpen) return null;
 
@@ -53,28 +67,40 @@ function AppointmentRecord({
           padding: "1rem",
         }}
       >
-        <div style={{ display: "flex", fontSize: "1.4rem" }}>
-          <div style={{ flex: 1, textAlign: "right", paddingRight: "1rem" }}>
-            <p>Topic:</p>
-            <p>Counsellor:</p>
-            <p>Date:</p>
+        <div
+          style={{
+            flex: 1,
+            textAlign: "right",
+            paddingRight: "1rem",
+            display: "flex",
+            flexDirection: "column",
+            fontSize: "1.4rem",
+          }}
+        >
+          <div style={contentStyle}>
+            <p style={titleStyle}>Topic:</p>
+            <div style={detailStyle}>
+              <p style={{minWidth:'35rem', maxWidth:'35rem'}}>{detail.topic}</p>
+            </div>
           </div>
-          <div style={{ flex: 1 }}>
-            <p>{detail.topic}</p>
-            <p>{counsellor.name}</p>
-            <p>{detail.date}</p>
+          <div style={contentStyle}>
+            <p style={titleStyle}>Counsellor:</p>
+            <p style={detailStyle}>{counsellor.name}</p>
           </div>
-        </div>
-        {/* Textarea for recording session details */}
-        <div className="recordTextArea">
-          <textarea
-            style={{ whiteSpace: "pre-wrap" }}
-            id="w3review"
-            name="w3review"
-            rows="20"
-            cols="120"
-            onChange={handleChange}
-          />
+          <div style={contentStyle}>
+            <p style={titleStyle}>Date:</p>
+            <p style={detailStyle}>{detail.date}</p>
+          </div>
+          <div style={contentStyle} className="recordTextArea">
+            <textarea
+              style={{ whiteSpace: "pre-wrap" }}
+              id="w3review"
+              name="w3review"
+              rows="20"
+              cols="120"
+              onChange={handleChange}
+            />
+          </div>
         </div>
 
         {/* Submit and Cancel buttons */}

@@ -28,6 +28,22 @@ function AppointmentDetail({
     }
   };
 
+  const titleStyle = {
+    padding: "0.2rem",
+    flex: 1,
+  };
+  const detailStyle = {
+    padding: "0.2rem",
+    flex: 1,
+    textAlign: "left",
+  };
+
+  const contentStyle = {
+    flex: 1,
+    display: "flex",
+    flexDirection: "row",
+  };
+
   // If the modal is not open, do not render anything
   if (!isOpen) return null;
 
@@ -49,14 +65,55 @@ function AppointmentDetail({
             fontSize: "1.4rem",
           }}
         >
-          <div style={{ flex: 1, textAlign: "right", paddingRight: "1rem" }}>
-            <p>Topic:</p>
-            <p>Service:</p>
-            <p>Prefered Language:</p>
-            <p>Counsellor:</p>
-            <p>Date:</p>
-            <p>Time:</p>
-            <p>Venue:</p>
+          <div
+            style={{
+              flex: 1,
+              textAlign: "right",
+              paddingRight: "1rem",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <div style={contentStyle}>
+              <p style={titleStyle}>Topic:</p>
+              <div style={detailStyle}>
+                <p style={{ maxWidth: "20rem" }}>{detail.topic}</p>
+              </div>
+            </div>
+            <div style={contentStyle}>
+              <p style={titleStyle}>Service:</p>
+              <p style={detailStyle}>{detail.service}</p>
+            </div>
+            <div style={contentStyle}>
+              <p style={titleStyle}>Language:</p>
+              <p style={detailStyle}>{detail.language}</p>
+            </div>
+            <div style={contentStyle}>
+              <p style={titleStyle}>Date:</p>
+              <p style={detailStyle}>{detail.date}</p>
+            </div>
+            <div style={contentStyle}>
+              <p style={titleStyle}>Time:</p>
+              <p style={detailStyle}>{detail.time}</p>
+            </div>
+            <div style={contentStyle}>
+              <p style={titleStyle}>Contact:</p>
+              <p style={detailStyle}>{detail.emergencyContact}</p>
+            </div>
+            <div style={contentStyle}>
+              <p style={titleStyle}>Address:</p>
+              <div style={detailStyle}>
+                <p style={{ maxWidth: "20rem" }}>{detail.address}</p>
+              </div>
+            </div>
+            <div style={contentStyle}>
+              <p style={titleStyle}>Venue:</p>
+              {detail.venue === "" ? (
+                <p style={detailStyle}>Waiting..</p>
+              ) : (
+                <p style={detailStyle}>{detail.venue}</p>
+              )}
+            </div>
           </div>
           <div className="neutral">
             <button
@@ -66,15 +123,6 @@ function AppointmentDetail({
             >
               Edit details
             </button>
-          </div>
-          <div style={{ flex: 1 }}>
-            <p>{detail.topic}</p>
-            <p>{detail.service}</p>
-            <p>{detail.language}</p>
-            <p>{counsellor.name}</p>
-            <p>{detail.date}</p>
-            <p>{detail.time}</p>
-            {detail.venue === "" ? <p>Waiting..</p> : <p>{detail.venue}</p>}
           </div>
         </div>
         <div
@@ -113,15 +161,14 @@ function AppointmentDetail({
               Record Session
             </button>
           </div>
-        </div>
-
-        <div
-          className="neutral"
-          style={{ position: "absolute", right: "3rem", bottom: "2.5rem" }}
-        >
-          <button className="toggle-button" onClick={onClose}>
-            Return
-          </button>
+          <div
+            className="neutral"
+            style={{ position: "absolute", right: "3rem" }}
+          >
+            <button className="toggle-button" onClick={onClose}>
+              Return
+            </button>
+          </div>
         </div>
       </div>
 

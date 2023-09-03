@@ -18,19 +18,24 @@ function AppointmentListRow({ detail, openProfile, onClose }) {
     fetchData();
   }, [detail]);
 
-  const detailHeader = {
+  const detailStyle = {
+    flex: 3,
+    minWidth: "20rem",
+    maxWidth: "20rem",
+    padding: "1rem",
+    textAlign: "left",
+  };
+  const titleStyle = {
     flex: 1,
     padding: "1rem",
     textAlign: "right",
   };
 
-  const detailStyle = {
-    flex: 1,
-    minWidth: "12.5rem",
-    padding: "1rem",
-    textAlign: "left",
+  const contentStyle = {
+    flex: 2,
+    display: "flex",
+    flexDirection: "row",
   };
-
   // State for modal open/close and message
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("Hello");
@@ -55,7 +60,7 @@ function AppointmentListRow({ detail, openProfile, onClose }) {
                 height="180em"
               ></img>
             </div>
-            <div className="columnMiddleContainer">
+            <div style={{ flex: 2, display: "flex" }}>
               <div
                 style={{
                   flex: "1.5",
@@ -89,18 +94,18 @@ function AppointmentListRow({ detail, openProfile, onClose }) {
             <p>{detail.time}</p>
           </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div className="apptColumnTitleContent">
-            <div className="apptColumnTitleContentColumn">
-              <div style={detailHeader}>Topic: </div>
-              <div style={detailHeader}>Service: </div>
-              <div style={detailHeader}>Prefered Language: </div>
-            </div>
-            <div className="apptColumnTitleContentColumn">
-              <div style={detailStyle}>{detail.topic}</div>
-              <div style={detailStyle}>{detail.service}</div>
-              <div style={detailStyle}>{detail.language}</div>
-            </div>
+        <div style={{ flex: 3, display: "flex", flexDirection: "column" }}>
+          <div style={contentStyle}>
+            <p style={titleStyle}>Topic:</p>
+            <p style={detailStyle}>{detail.topic}</p>
+          </div>
+          <div style={contentStyle}>
+            <p style={titleStyle}>Service:</p>
+            <p style={detailStyle}>{detail.service}</p>
+          </div>
+          <div style={contentStyle}>
+            <p style={titleStyle}>Language:</p>
+            <p style={detailStyle}>{detail.language}</p>
           </div>
           {detail.facebookLink.length > 0 ? (
             <div
