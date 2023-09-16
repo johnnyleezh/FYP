@@ -20,7 +20,7 @@ function App() {
   };
 
   useEffect(() => {
-    fetchUserData("KQE0CQ7lk0Y9SabrgPz7");
+    fetchUserData(userRoles.counsellor);
   }, []);
 
   const userRoles = {

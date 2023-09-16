@@ -50,7 +50,7 @@ function Navbar({ user, changeUser }) {
             </li>
           ))}
         </ul>
-        {user.role && (
+        {/* {user.role && (
           <Button buttonStyle='btn--outline' onClick={changeUser}>
             {user.role === 'counsellor'
               ? 'Counsellor'
@@ -58,7 +58,7 @@ function Navbar({ user, changeUser }) {
               ? 'Student'
               : 'Academic Advisor'}
           </Button>
-        )}
+        )} */}
       </div>
     </nav>
   );

@@ -52,6 +52,44 @@ const readSpecificData = async (table, uniqueId) => {
     }
 };
 
+const readSpecificUserDataMonitor = async (table, uniqueId) => {
+    const readDataRef = collection(db, table);
+    const q = query(readDataRef);
+    const data = await getDocs(q);
+
+    if (!data.empty) {
+        const dataMap = data.docs.map((doc) => ({ ...doc.data(), uniqueId: doc.id }));
+        const foundData = dataMap.find((item) => item.clientId === uniqueId);
+
+        if (!foundData) {
+            return null;
+        } else {
+            return foundData;
+        }
+    } else {
+        return null;
+    }
+};
+
+const readSpecificUserData = async (table, uniqueId) => {
+    const readDataRef = collection(db, table);
+    const q = query(readDataRef);
+    const data = await getDocs(q);
+
+    if (!data.empty) {
+        const dataMap = data.docs.map((doc) => ({ ...doc.data(), uniqueId: doc.id }));
+        const foundData = dataMap.find((item) => item.userId === uniqueId);
+
+        if (!foundData) {
+            return null;
+        } else {
+            return foundData;
+        }
+    } else {
+        return null;
+    }
+};
+
 // Function to read all data from a table
 const readTableData = async (table) => {
     try {
@@ -98,4 +136,6 @@ export {
     deleteData,
     readSpecificData,
     readTableData,
+    readSpecificUserData,
+    readSpecificUserDataMonitor,
 };

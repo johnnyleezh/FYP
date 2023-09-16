@@ -16,11 +16,11 @@ function Questionnaire({ questionType, user }) {
     const formattedDate = `${day}/${month}/${year}`;
 
     const answerOptions = [
-        { answerText: '1 - Not at all', isCorrect: 5 },
-        { answerText: '2 - Rarely', isCorrect: 4 },
-        { answerText: '3 - Sometimes', isCorrect: 3 },
-        { answerText: '4 - Often', isCorrect: 2 },
-        { answerText: '5 - Extreme', isCorrect: 1 },
+        { answerText: '1 - Highly disagree', isCorrect: 5 },
+        { answerText: '2 - Disagree', isCorrect: 4 },
+        { answerText: '3 - Neutral', isCorrect: 3 },
+        { answerText: '4 - Agree', isCorrect: 2 },
+        { answerText: '5 - Highly agree', isCorrect: 1 },
     ];
 
     const [currentQuestion, setCurrentQuestion] = useState(0);

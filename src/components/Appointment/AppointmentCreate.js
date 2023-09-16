@@ -8,6 +8,8 @@ import TimePicker from "../CRUD/TimePicker";
 import PickerWithAutocompleteField from "../CRUD/ScheduleDate";
 import TimeAutoComplete from "../CRUD/TimeAutoComplete";
 import Paper from "@mui/material/Paper";
+import { readSpecificUserData } from "../CRUD/CRUD";
+import { useCalendarState } from "@mui/x-date-pickers/internals";
 
 function AppointmentCreate({ isOpen, onClose, user }) {
   const [createApptDetails, setCreateApptDetails] = useState({
@@ -24,6 +26,7 @@ function AppointmentCreate({ isOpen, onClose, user }) {
     venue: "",
     confirmation: false,
   });
+  const [userFound, setUserFound] = useState("primary");
   const [studentList, setStudentList] = useState([]);
   const [counsellorList, setCounsellorList] = useState([]);
   const [selectStudent, setSelectStudent] = useState([]);
@@ -70,6 +73,20 @@ function AppointmentCreate({ isOpen, onClose, user }) {
       ...prevDetails,
       [name]: value,
     }));
+  };
+
+  const handleChangeUser = async (e) => {
+    const { name, value } = e.target;
+    const fetchUser = await readSpecificUserData("User", value);
+    if (fetchUser) {
+      setUserFound("success");
+      setCreateApptDetails((prevDetails) => ({
+        ...prevDetails,
+        [name]: fetchUser.uniqueId,
+      }));
+    } else {
+      setUserFound("error");
+    }
   };
 
   const handleDateChange = (value) => {
@@ -176,17 +193,30 @@ function AppointmentCreate({ isOpen, onClose, user }) {
             />
           </div>
           <div style={rowStyle}>
-            <SearchBar
-              sx={{ width: "100%", backgroundColor: "white" }}
-              label={
-                user.role === "counsellor"
-                  ? "Student ID/Name"
-                  : "Counsellor ID/Name"
-              }
-              user={user}
-              data={user.role === "counsellor" ? studentList : counsellorList}
-              selectedProfile={obtainedProfile}
-            />
+            {user.role == "student" ? (
+              <SearchBar
+                sx={{ width: "100%", backgroundColor: "white" }}
+                label={
+                  user.role === "counsellor"
+                    ? "Student ID/Name"
+                    : "Counsellor ID/Name"
+                }
+                user={user}
+                data={user.role === "counsellor" ? studentList : counsellorList}
+                selectedProfile={obtainedProfile}
+              />
+            ) : (
+              <TextField
+                fullWidth
+                placeholder="Student ID"
+                label={"Student ID"}
+                color={userFound}
+                name="clientId"
+                sx={{ backgroundColor: "white" }}
+                onBlur={handleChangeUser}
+                focused
+              />
+            )}
           </div>
         </div>
         <div
