@@ -2,14 +2,26 @@ import React, { useState, useEffect } from "react";
 import "./AppointmentList.css";
 import AppointmentPopUpModal from "./AppointmentPopUpModal";
 import { readSpecificData } from "../CRUD/CRUD";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
 
 function AppointmentListRow({ detail, openProfile, onClose }) {
+
+  const [imageUrl, setImageUrl] = useState('/images/emptyProfile.webp');
   // State to hold client data
   const [client, setClient] = useState([]);
 
   // Fetch client data based on detail's clientId
   const fetchData = async () => {
     const fetchData = await readSpecificData("User", detail.clientId);
+    try {
+      const storage = getStorage();
+      const storageRef = ref(storage, '/Profile Pictures/' + fetchData.userId + '.jpg'); // Replace with the path to your image in Firebase Storage
+      const url = await getDownloadURL(storageRef);
+      setImageUrl(url);
+    } catch (error) {
+      console.error('Error fetching image:', error);
+    }
     setClient(fetchData);
   };
 
@@ -53,7 +65,7 @@ function AppointmentListRow({ detail, openProfile, onClose }) {
             <div className="columnContainer">
               {/* Display client's profile picture */}
               <img
-                src={client.picture}
+                src={imageUrl}
                 className="photo"
                 alt="Student Photo"
                 width="140em"

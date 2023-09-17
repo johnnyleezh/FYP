@@ -1,13 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { LatestScore } from "../CRUD/ReadScore";
 import StudentProfile from "../Profile/StudentProfile";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 const MonitorRow = ({ isOpen, detail, mental, clickable }) => {
+  
+  const [imageUrl, setImageUrl] = useState('/images/emptyProfile.webp');
+  
   // Prepare the data object to pass to the StudentProfile component
   const dataToPass = {
     detail: detail,
   };
+
+  useEffect(() => {
+    async function fetchImage() {
+      try {
+        const storage = getStorage();
+        const storageRef = ref(storage, '/Profile Pictures/' + detail.userId + '.jpg'); // Replace with the path to your image in Firebase Storage
+        const url = await getDownloadURL(storageRef);
+        setImageUrl(url);
+      } catch (error) {
+        console.error('Error fetching image:', error);
+      }
+    }
+
+    fetchImage();
+  }, []);
 
   // Function to display the mental health score section
   const displayScore = () => {
@@ -42,7 +61,8 @@ const MonitorRow = ({ isOpen, detail, mental, clickable }) => {
       <div className="rowContainer">
         <div className="columnContainer">
           <img
-            src={detail.picture}
+            // src={detail.picture}
+            src={imageUrl}
             className="photo"
             alt="Student Photo"
             width="140em"
